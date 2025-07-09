@@ -3,9 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="description"
-    content="AuraFusion360: Augmented Unseen Region Alignment for Reference-based 360° Unbounded Scene Inpainting.">
-  <meta name="keywords" content="AuraFusion360, 3DGS, Inpainting">
+  <meta name="description" content="LightsOut: Diffusion-based Outpainting for Enhanced Lens Flare Removal.">
+  <meta name="keywords" content="LightsOut, Lens Flare Removal, Outpainting, Diffusion Model">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LightsOut</title>
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -51,85 +50,31 @@
 
 <body>
 
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-    <div class="navbar-menu">
-      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-        <a class="navbar-item" href="https://kkennethwu.github.io">
-          <span class="icon">
-            <i class="fas fa-home"></i>
-          </span>
-        </a>
-
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            More Research
-          </a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://linjohnss.github.io/frugalnerf/">
-              FurgalNeRF
-            </a>
-            <a class="navbar-item" href="https://chenwei891213.github.io/GCC/">
-              GCC
-            </a>
-            <a class="navbar-item" href="https://cdfan0627.github.io/spectromotion/">
-              SpectroMotion
-            </a>
-            <a class="navbar-item" href="https://kirito878.github.io/DeNVeR/">
-              DeNVeR
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </nav>
-
-
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title neon-text">AuraFusion360 <img src="static/images/favicon.svg"
-                alt="icon" style="height: 1em; vertical-align: top;"></h1>
-            <h2 class="subtitle is-3 publication-subtitle"><strong>Augmented Unseen Region Alignment for Reference-based
-                360° Unbounded Scene Inpainting</strong></h2>
-            <h3 class="subtitle is-3 publication-subtitle"><strong>CVPR 2025</strong></h3>
+            <h1 class="title is-1 publication-title neon-text">LightsOut <img src="static/images/favicon.svg" alt="icon"
+                style="height: 1em; "></h1>
+            <h2 class="subtitle is-3 publication-subtitle"><strong>Diffusion-based Outpainting for Enhanced Lens Flare
+                Removal</strong></h2>
+            <h3 class="subtitle is-3 publication-subtitle"><strong>ICCV 2025</strong></h3>
             <div class="is-size-4 publication-authors">
               <span class="author-block">
-                <a href="https://kkennethwu.github.io/">Chung-Ho Wu*</a><sup>1</sup>,</span>
+                <a href="https://ray-1026.github.io/">Shr-Ruei Tsai</a>,</span>
               <span class="author-block">
-                <a href="">Yang-Jung Chen*</a><sup>1</sup>,</span>
+                <a href="">Wei-Cheng Chang</a>,</span>
               <span class="author-block">
-                <a href="">Ying-Huan Chen</a><sup>1</sup>,</span>
+                <a href="https://jayinnn.dev/">Jie-Ying Lee</a>,</span>
               <span class="author-block">
-                <a href="https://jayinnn.dev/">Jie-Ying Lee</a><sup>1</sup>,</span>
+                <a href="https://su-terry.github.io/">Chih-Hai Su</a>,</span>
               <span class="author-block">
-                <a href="https://hentci.github.io/">Bo-Hsu Ke</a><sup>1</sup>,</span>
-              <span class="author-block">
-                <a href="">Chun-Wei Tuan Mu</a><sup>1</sup>,</span>
-              <span class="author-block">
-                <a href="">Yi-Chuan Huang</a><sup>1</sup>,</span>
-              <span class="author-block">
-                <a href="https://linjohnss.github.io/">Chin-Yang Lin</a><sup>1</sup>,</span>
-              <span class="author-block">
-                <a href="https://minhungchen.netlify.app/">Min-Hung Chen</a><sup>2</sup>,</span>
-              <span class="author-block">
-                <a href="https://sites.google.com/site/yylinweb/">Yen-Yu Lin</a><sup>1</sup>,</span>
-              <span class="author-block">
-                <a href="https://yulunalexliu.github.io/">Yu-Lun Liu</a><sup>1</sup></span>
+                <a href="https://yulunalexliu.github.io/">Yu-Lun Liu</a></span>
             </div>
 
             <div class="is-size-4 publication-authors">
-              <span class="author-block"><sup>1</sup>National Yang Ming Chiao Tung University,</span>
-              <span class="author-block"><sup>2</sup>NVIDIA</span>
+              <span class="author-block">National Yang Ming Chiao Tung University</span>
             </div>
 
             <div class="column has-text-centered">
@@ -145,7 +90,7 @@
                 </a>
               </span> -->
                 <span class="link-block">
-                  <a href="http://arxiv.org/abs/2502.05176" class="external-link button is-normal is-rounded is-dark">
+                  <a href="" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="ai ai-arxiv"></i>
                     </span>
@@ -164,8 +109,7 @@
               </span> -->
                 <!-- Code Link. -->
                 <span class="link-block">
-                  <a href="https://github.com/kkennethwu/AuraFusion360_official.git"
-                    class="external-link button is-normal is-rounded is-dark">
+                  <a href="" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
@@ -173,37 +117,37 @@
                   </a>
                 </span>
                 <!-- Dataset Google Drive Link. -->
-                <span class="link-block">
-                  <a href="https://drive.google.com/drive/folders/1C0OqUSavUBwR_p_yNRBia90jvC-23hNN?usp=sharing"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <img src="https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png" width="20"
-                        height="20" alt="Google Drive">
-                    </span>
-                    <span>Data (Google Drive)</span>
-                  </a>
-                </span>
+                <!-- <span class="link-block"> -->
+                <!-- <a href="https://drive.google.com/drive/folders/1C0OqUSavUBwR_p_yNRBia90jvC-23hNN?usp=sharing"
+                    class="external-link button is-normal is-rounded is-dark"> -->
+                <!-- <span class="icon"> -->
+                <!-- <img src="https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png" width="20"
+                        height="20" alt="Google Drive"> -->
+                <!-- </span> -->
+                <!-- <span>Data (Google Drive)</span> -->
+                <!-- </a> -->
+                <!-- </span> -->
                 <!-- Dataset HF Link. -->
-                <span class="link-block">
-                  <a href="https://huggingface.co/datasets/kkennethwu/360-USID"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" width="20"
-                        height="20" alt="HF">
-                    </span>
-                    <span>Data (HF)</span>
-                  </a>
-                </span>
+                <!-- <span class="link-block"> -->
+                <!-- <a href="https://huggingface.co/datasets/kkennethwu/360-USID"
+                    class="external-link button is-normal is-rounded is-dark"> -->
+                <!-- <span class="icon"> -->
+                <!-- <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" width="20"
+                        height="20" alt="HF"> -->
+                <!-- </span> -->
+                <!-- <span>Data (HF)</span> -->
+                <!-- </a> -->
+                <!-- </span> -->
                 <!-- Results Link. -->
-                <span class="link-block">
-                  <a href="https://drive.google.com/drive/folders/1ujTKiBfTBD_BVv9YiifOl_SfG8sd0dZ6?usp=sharing"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="far fa-images"></i>
-                    </span>
-                    <span>Evaluation Results</span>
-                  </a>
-                </span>
+                <!-- <span class="link-block"> -->
+                <!-- <a href="https://drive.google.com/drive/folders/1ujTKiBfTBD_BVv9YiifOl_SfG8sd0dZ6?usp=sharing"
+                    class="external-link button is-normal is-rounded is-dark"> -->
+                <!-- <span class="icon"> -->
+                <!-- <i class="far fa-images"></i> -->
+                <!-- </span> -->
+                <!-- <span>Evaluation Results</span> -->
+                <!-- </a> -->
+                <!-- </span> -->
               </div>
 
             </div>
@@ -219,10 +163,10 @@
         <div class="pipeline-figure">
           <img src="./static/images/teaser.png" alt="Teaser" style="width: 100%;" />
         </div>
-        <h2 class="subtitle is-3 has-text-centered">
-          <!-- <span class="dnerf">AuraFusion360</span> can do inpainting in the 360° unbounded scene. -->
-          <span class="subtitle is-3 neon-text">AuraFusion360</span> can perform inpainting in a 360° unbounded scene..
-        </h2>
+        <!-- <h2 class="subtitle is-3 has-text-centered"> -->
+        <!-- <span class="dnerf">AuraFusion360</span> can do inpainting in the 360° unbounded scene. -->
+        <!-- <span class="subtitle is-3 neon-text">AuraFusion360</span> can perform inpainting in a 360° unbounded scene.. -->
+        <!-- </h2> -->
       </div>
     </div>
   </section>
@@ -236,14 +180,13 @@
           <h2 class="title is-2">Video</h2>
           <div class="video-container"
             style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px;">
-            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px;"
-              src="https://www.youtube.com/embed/V1_EMXtYhTE" frameborder="0"
+            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px;" src=""
+              frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen></iframe>
           </div>
         </div>
       </div>
-
 
       <!-- Abstract. -->
       <div class="columns is-centered has-text-centered">
@@ -251,16 +194,14 @@
           <h2 class="title is-2">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              Three-dimensional scene inpainting is crucial for applications from virtual reality to architectural
-              visualization, yet existing methods struggle with view consistency and geometric accuracy in 360°
-              unbounded scenes. We present AuraFusion360, a novel reference-based method that enables high-quality
-              object removal and hole filling in 3D scenes represented by Gaussian Splatting. Our approach introduces
-              (1) depth-aware unseen mask generation for accurate occlusion identification, (2) Adaptive Guided Depth
-              Diffusion, a zero-shot method for accurate initial point placement without requiring additional training,
-              and (3) SDEdit-based detail enhancement for multi-view coherence. We also introduce 360-USID, the first
-              comprehensive dataset for 360° unbounded scene inpainting with ground truth. Extensive experiments
-              demonstrate that AuraFusion360 significantly outperforms existing methods, achieving superior perceptual
-              quality while maintaining geometric accuracy across dramatic viewpoint changes.
+              Lens flare significantly degrades image quality, impacting critical computer vision tasks like object
+              detection and autonomous driving. Recent Single Image Flare Removal (SIFR) methods perform poorly when
+              off-frame light sources are incomplete or absent. We propose LightsOut, a diffusion-based outpainting
+              framework tailored to enhance SIFR by reconstructing off-frame light sources. Our method leverages a
+              multitask regression module and LoRA fine-tuned diffusion model to ensure realistic and physically
+              consistent outpainting results. Comprehensive experiments demonstrate LightsOut consistently boosts the
+              performance of existing SIFR methods across challenging scenarios without additional retraining, serving
+              as a universally applicable plug-and-play preprocessing solution.
             </p>
           </div>
         </div>
@@ -276,15 +217,7 @@
           </div>
           <div class="content has-text-justified">
             <p>
-              Our approach takes multi-view RGB images and corresponding object masks as input and outputs a Gaussian
-              representation with the masked objects removed. The pipeline consists of three main stages: <strong>(a)
-                Depth-Aware Unseen Masks Generation to identify truly occluded areas, referred to as the “unseen
-                region”</strong>, <strong>(b) Depth-Aligned Gaussian Initialization on Reference View to fill unseen
-                regions with initialized Gaussian containing reference RGB information after object removal</strong>,
-              and <strong>(c) SDEdit-Based RGB Guidance for Detail Enhancement, which enhances fine details using an
-                inpainting model while preserving reference view information</strong>. Instead of applying SDEdit with
-              random noise, we use DDIM Inversion on the rendered initial Gaussians to generate noise that retains the
-              structure of the reference view, ensuring multi-view consistency across all RGB Guidance.
+
             </p>
           </div>
         </div>
@@ -338,9 +271,9 @@
       <div class="columns is-centered">
         <div class="column is-full-width">
 
-          <h3 id="title-text" class="subtitle is-4" style="text-align: center;">
-            AuraFusion360 outperforms other methods in unbounded 360° scene inpainting.
-          </h3>
+          <!-- <h3 id="title-text" class="subtitle is-4" style="text-align: center;"> -->
+          <!-- AuraFusion360 outperforms other methods in unbounded 360° scene inpainting. -->
+          <!-- </h3> -->
 
           <div class="text-center ">
             <ul class="nav nav-pills center-pills">
