@@ -62,7 +62,7 @@
             <h3 class="subtitle is-3 publication-subtitle"><strong>ICCV 2025</strong></h3>
             <div class="is-size-4 publication-authors">
               <span class="author-block">
-                <a href="https://ray-1026.github.io/">Shr-Ruei Tsai</a>,</span>
+                <a href="">Shr-Ruei Tsai</a>,</span>
               <span class="author-block">
                 <a href="">Wei-Cheng Chang</a>,</span>
               <span class="author-block">
@@ -109,7 +109,8 @@
               </span> -->
                 <!-- Code Link. -->
                 <span class="link-block">
-                  <a href="" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://github.com/Ray-1026/LightsOut-official"
+                    class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
@@ -163,10 +164,10 @@
         <div class="pipeline-figure">
           <img src="./static/images/teaser.png" alt="Teaser" style="width: 100%;" />
         </div>
-        <!-- <h2 class="subtitle is-3 has-text-centered"> -->
-        <!-- <span class="dnerf">AuraFusion360</span> can do inpainting in the 360° unbounded scene. -->
-        <!-- <span class="subtitle is-3 neon-text">AuraFusion360</span> can perform inpainting in a 360° unbounded scene.. -->
-        <!-- </h2> -->
+        <h2 class="subtitle is-3 has-text-centered">
+          <!-- <span class="dnerf">AuraFusion360</span> can do inpainting in the 360° unbounded scene. -->
+          <span class="subtitle is-3 neon-text">LightsOut</span> ...
+        </h2>
       </div>
     </div>
   </section>
@@ -209,15 +210,24 @@
       <!--/ Abstract. -->
 
       <!-- Pipeline Fig. -->
-      <div class="columns is-centered">
+      <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <h2 class="title is-2">Pipeline</h2>
+          <h2 class="title is-2">Approach</h2>
           <div class="pipeline-figure">
-            <img src="./static/images/pipeline.png" alt="Pipeline" style="width: 100%;" />
+            <img src="./static/images/pipeline.png" alt="Pipeline" style="width: 95%;" />
           </div>
           <div class="content has-text-justified">
             <p>
-
+              (a) <strong>Light source prediction and conditioning</strong>: We introduce a multitask regression module
+              to accurately predict off-frame or incomplete light source parameters (positions, radii, and confidences).
+              These predicted parameters guide a rendering function to generate the corresponding light source mask. (b)
+              <strong>Light source outpainting</strong>: Leveraging a LoRA fine-tuned diffusion-based inpainting model
+              with light source conditioning, our approach accurately outpaints both missing off-frame light sources and
+              associated flare artifacts, producing visually coherent and realistic results. (c) <strong>SIFR
+                boosting</strong>: Our generated outpainted images serve as enhanced inputs to existing SIFR methods,
+              significantly improving their performance on previously challenging scenarios with incomplete light source
+              information. The proposed pipeline thus effectively operates as a plug-and-play module to boost existing
+              flare removal models.
             </p>
           </div>
         </div>
@@ -233,7 +243,7 @@
   <section class="section">
     <div class="container is-max-desktop">
       <!-- Animation. -->
-      <div class="columns is-centered">
+      <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
           <h2 class="title is-2">Visualization Results</h2>
         </div>
@@ -459,19 +469,16 @@
       </div>
 
       <!-- Quantitative Results. -->
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-2">Quantitative Results</h2>
-          <p class="content has-text-justified">
-            Quantitative comparison of 360° inpainting methods on our <span class="dnerf"> 360-USID dataset</span>.
-            <span style="color: red;">Red</span> text indicates the best, and <span
-              style="color: rgb(0, 0, 255);">Blue</span> text
-            indicates the second-best performing method.
-          </p>
-          <img src="./static/images/quantitative.png" alt="Quantitative" style="width: 100%;" />
+      <!-- <div class="columns is-centered has-text-centered"> -->
+      <!-- <div class="column is-full-width"> -->
+      <!-- <h2 class="title is-2">Quantitative Results</h2> -->
+      <!-- <p class="content has-text-justified"> -->
 
-        </div>
-      </div>
+      <!-- </p> -->
+      <!-- <img src="./static/images/quantitative.png" alt="Quantitative" style="width: 100%;" /> -->
+
+      <!-- </div> -->
+      <!-- </div> -->
       <!-- Quantitative Results -->
 
       <!-- Poster -->
@@ -486,7 +493,7 @@
       <!-- Citation -->
       <div class="columns is-centered">
         <div class="column is-full-width">
-          <h2 class="title is-2">Citation</h2>
+          <h2 class="title is-2">BibTeX</h2>
           <div
             style="display: inline-block; text-align: left; max-width: 100%; background: #f5f5f5; padding: 10px; border-radius: 5px;">
             <textarea id="bibtex" style="display: none;">
@@ -521,11 +528,10 @@
   <footer class="footer">
     <div class="container">
       <div class="content has-text-centered">
-        <a class="icon-link" href="http://arxiv.org/abs/2502.05176">
+        <a class="icon-link" href="">
           <i class="fas fa-file-pdf"></i>
         </a>
-        <a class="icon-link" href="https://github.com/kkennethwu/AuraFusion360_official.git" class="external-link"
-          disabled>
+        <a class="icon-link" href="" class="external-link" disabled>
           <i class="fab fa-github"></i>
         </a>
       </div>
