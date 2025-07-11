@@ -400,13 +400,13 @@ input:checked+.slider:after {
 }
 
 .comparison-grid .hover-swap-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  transition: transform 0.2s ease !important;
 }
 
 .comparison-grid .hover-swap-image:hover {
-  transform: scale(1.02);
+  transform: scale(1.02) !important;
 }
