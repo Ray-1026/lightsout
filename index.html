@@ -246,225 +246,97 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
           <h2 class="title is-2">Visualization Results</h2>
+          
+          <!-- Method Selection Pills -->
+          <div class="text-center">
+            <ul class="nav nav-pills center-pills">
+              <li class="method-pill active" data-value="zhou" onclick="selectComparisonMethod(this)">
+                <a>Zhou, et al</a>
+              </li>
+              <li class="method-pill" data-value="flare7k" onclick="selectComparisonMethod(this)">
+                <a>Flare7K++</a>
+              </li>
+              <li class="method-pill" data-value="mfdnet" onclick="selectComparisonMethod(this)">
+                <a>MFDNet</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Image Grid with Hover Swap -->
+          <div class="comparison-grid" style="margin: 2rem 0;">
+            <!-- First Row -->
+            <div class="columns is-centered">
+              <div class="column is-4">
+                <div class="hover-swap-container">
+                  <img id="comparison-image-1" 
+                       src="./static/images/input.png" 
+                       data-hover="./static/images/output.png" 
+                       alt="Comparison 1" 
+                       class="hover-swap-image" />
+                </div>
+              </div>
+              <div class="column is-4">
+                <div class="hover-swap-container">
+                  <img id="comparison-image-2" 
+                       src="./static/images/input.png" 
+                       data-hover="./static/images/output.png" 
+                       alt="Comparison 2" 
+                       class="hover-swap-image" />
+                </div>
+              </div>
+              <div class="column is-4">
+                <div class="hover-swap-container">
+                  <img id="comparison-image-3" 
+                       src="./static/images/input.png" 
+                       data-hover="./static/images/output.png" 
+                       alt="Comparison 3" 
+                       class="hover-swap-image" />
+                </div>
+              </div>
+            </div>
+            
+            <!-- Second Row -->
+            <div class="columns is-centered">
+              <div class="column is-4">
+                <div class="hover-swap-container">
+                  <img id="comparison-image-4" 
+                       src="./static/images/input.png" 
+                       data-hover="./static/images/output.png" 
+                       alt="Comparison 4" 
+                       class="hover-swap-image" />
+                </div>
+              </div>
+              <div class="column is-4">
+                <div class="hover-swap-container">
+                  <img id="comparison-image-5" 
+                       src="./static/images/input.png" 
+                       data-hover="./static/images/output.png" 
+                       alt="Comparison 5" 
+                       class="hover-swap-image" />
+                </div>
+              </div>
+              <div class="column is-4">
+                <div class="hover-swap-container">
+                  <img id="comparison-image-6" 
+                       src="./static/images/input.png" 
+                       data-hover="./static/images/output.png" 
+                       alt="Comparison 6" 
+                       class="hover-swap-image" />
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <p class="hover-instruction">Hover over any image to see the comparison results</p>
         </div>
       </div>
       <!--/ Animation. -->
 
-
-      <!-- Concurrent Work. -->
-      <!-- <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Related Links</h2>
-
-        <div class="content has-text-justified">
-          <p>
-            There's a lot of excellent work that was introduced around the same time as ours.
-          </p>
-          <p>
-            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
-          </p>
-          <p>
-            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
-            both use deformation fields to model non-rigid scenes.
-          </p>
-          <p>
-            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
-          </p>
-          <p>
-            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
-          </p>
-        </div>
-      </div>
-    </div> -->
-      <!--/ Concurrent Work. -->
-
       <div class="columns is-centered">
         <div class="column is-full-width">
-
-          <!-- <h3 id="title-text" class="subtitle is-4" style="text-align: center;"> -->
-          <!-- AuraFusion360 outperforms other methods in unbounded 360° scene inpainting. -->
-          <!-- </h3> -->
-
-          <div class="text-center ">
-            <ul class="nav nav-pills center-pills">
-              <li class="method-pill active" data-value="gscream" onclick="selectCompVideo(this, activeScenePill)">
-                <a>GScream</a>
-              </li>
-              <li class="method-pill" data-value="gaussiangrouping" onclick="selectCompVideo(this, activeScenePill)">
-                <a>GaussianGrouping</a>
-              </li>
-              <li class="method-pill" data-value="infusion" onclick="selectCompVideo(this, activeScenePill)">
-                <a>InFusion</a>
-              </li>
-              <li class="method-pill" data-value="2dgsleftrefill" onclick="selectCompVideo(this, activeScenePill)">
-                <a>2DGS+LeftRefill</a>
-              </li>
-              <li class="method-pill" data-value="spin" onclick="selectCompVideo(this, activeScenePill)">
-                <a>SPin-NeRF*</a>
-              </li>
-
-              <li class="method-pill" data-value="poisson" onclick="selectCompVideo(this, activeScenePill)">
-                <a>Poisson</a>
-              </li>
-              <li class="method-pill" data-value="gdd" onclick="selectCompVideo(this, activeScenePill)"><a>Guided Depth
-                  Diffusion</a></li>
-              <li class="method-pill" data-value="scaleshift" onclick="selectCompVideo(this, activeScenePill)"><a>Scale
-                  & Shift</a></li>
-            </ul>
-            <!-- <ul class="nav nav-pills center-pills">
-                  <li class="method-pill" data-value="freenerf"
-                      onclick="selectCompVideo(this, activeScenePill)"><a>FreeNeRF</a></li>
-                  <li class="method-pill" data-value="simplenerf"
-                      onclick="selectCompVideo(this, activeScenePill)"><a>SimpleNeRF</a></li>
-                  <li class="method-pill" data-value="zeronvs"
-                      onclick="selectCompVideo(this, activeScenePill)"><a>ZeroNVS</a></li>
-              </ul> -->
-          </div>
-
-          <script>
-            activeMethodPill = document.querySelector('.method-pill.active-pill');
-            activeScenePill = document.querySelector('.scene-pill.active-pill');
-            activeModePill = document.querySelector('.mode-pill.active-pill');
-
-            updateMethodVisibility('rgb')
-          </script>
-
-          <div class="text-center">
-            <div class="video-container">
-              <video class="video" style="height: 280px; max-width: 100%;" m id="compVideo0" loop playsinline autoplay
-                muted>
-                <source src="./videos/comparison/360USID_carton_gscream_vs_ours_rgb.mp4" />
-              </video>
-              <video class="video" style="height: 280px; max-width: 100%;" id="compVideo1" loop playsinline autoplay
-                muted hidden>
-                <source src="./videos/comparison/360USID_carton_gscream_vs_ours_rgb.mp4" />
-              </video>
-            </div>
-
-
-            <div class="text-center" style="color: black;" id="mode-pills">
-              <div class="btn-group btn-group-sm">
-                <span class="btn btn-primary mode-pill active" data-value="rgb"
-                  onclick="updateMethodVisibility('rgb'); selectCompVideo(activeMethodPill, activeScenePill, null, this)">
-                  Inpainting Results
-                </span>
-                <span class="btn btn-primary mode-pill" data-value="mask"
-                  onclick="updateMethodVisibility('mask'); selectCompVideo(activeMethodPill, activeScenePill, null, this)">
-                  Unseen Mask
-                </span>
-                <span class="btn btn-primary mode-pill" data-value="depth"
-                  onclick="updateMethodVisibility('depth'); selectCompVideo(activeMethodPill, activeScenePill, null, this)">
-                  Depth Initilaized Points
-                </span>
-              </div>
-            </div>
-
-
-            <br>
-            <p class="text-justify" style="text-align: center; display: none;">
-              Baseline method (left) vs AuraFusion360 (right). Scene trained on <span id="compVideoValue">3</span>
-              views. Try selecting different methods and scenes!
-            </p>
-            <p class="text-justify" style="text-align: center;">
-              <span id="description-text">3</span> Try selecting different methods and scenes!
-            </p>
-            <script>
-              video0 = document.getElementById("compVideo0");
-              video1 = document.getElementById("compVideo1");
-              video0.addEventListener('loadedmetadata', function () {
-                if (activeVidID == 0 && select) {
-                  video0.play();
-                  // print video size
-                  console.log(video0.videoWidth, video0.videoHeight);
-                  video0.hidden = false;
-                  video1.hidden = true;
-                }
-              });
-              video1.addEventListener('loadedmetadata', function () {
-                if (activeVidID == 1 && select) {
-                  video1.play();
-                  // print video size
-                  console.log(video1.videoWidth, video1.videoHeight);
-                  video0.hidden = true;
-                  video1.hidden = false;
-                }
-              });
-            </script>
-
-            <div class="pill-row scene-pills" id="scene-pills">
-              <span class="pill scene-pill active" data-value="360USID_carton"
-                onclick="selectCompVideo(activeMethodPill, this, 3)">
-                <img class="thumbnail-img" src="thumbnails/360USID_carton_thumbnail.png" alt="360USID/carton"
-                  width="64">
-              </span>
-              <span class="pill scene-pill" data-value="360USID_cone"
-                onclick="selectCompVideo(activeMethodPill, this, 3)">
-                <img class="thumbnail-img" src="thumbnails/360USID_cone_thumbnail.png" alt="360USID/cone" width="64">
-              </span>
-              <span class="pill scene-pill" data-value="360USID_skateboard"
-                onclick="selectCompVideo(activeMethodPill, this, 3)">
-                <img class="thumbnail-img" src="thumbnails/360USID_skateboard_thumbnail.png" alt="360USID/skateboard"
-                  width="64">
-              </span>
-              <span class="pill scene-pill" data-value="360USID_newcone"
-                onclick="selectCompVideo(activeMethodPill, this, 3)">
-                <img class="thumbnail-img" src="thumbnails/360USID_newcone_thumbnail.png" alt="360USID/newcone"
-                  width="64">
-              </span>
-              <span class="pill scene-pill" data-value="360USID_sunflower"
-                onclick="selectCompVideo(activeMethodPill, this, 3)">
-                <img class="thumbnail-img" src="thumbnails/360USID_sunflower_thumbnail.png" alt="360USID/sunflower"
-                  width="64">
-              </span>
-              <span class="pill scene-pill" data-value="360USID_plant"
-                onclick="selectCompVideo(activeMethodPill, this, 3)">
-                <img class="thumbnail-img" src="thumbnails/360USID_plant_thumbnail.png" alt="360USID/plant" width="64">
-              </span>
-              <span class="pill scene-pill" data-value="360USID_cookie"
-                onclick="selectCompVideo(activeMethodPill, this, 6)">
-                <img class="thumbnail-img" src="thumbnails/360USID_cookie_thumbnail.png" alt="360USID/cookie"
-                  width="64">
-              </span>
-              <br>
-
-              <span class="pill scene-pill" data-value="Other360_kitchen"
-                onclick="selectCompVideo(activeMethodPill, this, 6)">
-                <img class="thumbnail-img" src="thumbnails/Other360_kitchen_thumbnail.png" alt="Other360/kitchen"
-                  width="64">
-              </span>
-              <span class="pill scene-pill" data-value="Other360_bear"
-                onclick="selectCompVideo(activeMethodPill, this, 6)">
-                <img class="thumbnail-img" src="thumbnails/Other360_bear_thumbnail.png" alt="Other360/bear" width="64">
-              </span>
-              <span class="pill scene-pill" data-value="Other360_bonsai"
-                onclick="selectCompVideo(activeMethodPill, this, 6)">
-                <img class="thumbnail-img" src="thumbnails/Other360_bonsai_thumbnail.png" alt="Other360/bonsai"
-                  width="64">
-              </span>
-              <span class="pill scene-pill" data-value="Other360_room"
-                onclick="selectCompVideo(activeMethodPill, this, 6)">
-                <img class="thumbnail-img" src="thumbnails/Other360_room_thumbnail.png" alt="Other360/room" width="64">
-              </span>
-              <span class="pill scene-pill" data-value="Other360_vasedeck"
-                onclick="selectCompVideo(activeMethodPill, this, 6)">
-                <img class="thumbnail-img" src="thumbnails/Other360_vasedeck_thumbnail.png" alt="Other360/vasedeck"
-                  width="64">
-              </span>
-              <span class="pill scene-pill" data-value="Other360_pinecone"
-                onclick="selectCompVideo(activeMethodPill, this, 6)">
-                <img class="thumbnail-img" src="thumbnails/Other360_pinecone_thumbnail.png" alt="Other360/pinecone"
-                  width="64">
-              </span>
-
-            </div>
-
-            <script>
-              activeMethodPill = document.querySelector('.method-pill.active-pill');
-              activeScenePill = document.querySelector('.scene-pill.active-pill');
-              activeModePill = document.querySelector('.mode-pill.active-pill');
-              updateMethodVisibility('rgb')
-            </script>
-          </div>
+          <p class="text-justify" style="text-align: center;">
+            Compare our LightsOut method with different baseline approaches. Select a method above and hover over the image to see the before/after comparison.
+          </p>
         </div>
       </div>
 

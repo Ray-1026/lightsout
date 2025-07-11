@@ -20,6 +20,75 @@ function setInterpolationImage(i) {
 }
 
 
+// Image Hover Swap functionality
+function initImageHoverSwap() {
+  const hoverImages = document.querySelectorAll('.hover-swap-image');
+  
+  hoverImages.forEach(img => {
+    // Remove existing event listeners to prevent duplication
+    const newImg = img.cloneNode(true);
+    img.parentNode.replaceChild(newImg, img);
+    
+    const originalSrc = newImg.src;
+    const hoverSrc = newImg.getAttribute('data-hover');
+    
+    if (hoverSrc) {
+      // Preload the hover image
+      const hoverImage = new Image();
+      hoverImage.src = hoverSrc;
+      
+      newImg.addEventListener('mouseenter', function() {
+        this.src = hoverSrc;
+      });
+      
+      newImg.addEventListener('mouseleave', function() {
+        this.src = originalSrc;
+      });
+    }
+  });
+}
+
+// Method selection for comparison
+function selectComparisonMethod(element) {
+  // Remove active class from all method pills
+  document.querySelectorAll('.method-pill').forEach(pill => {
+    pill.classList.remove('active');
+  });
+  
+  // Add active class to selected pill
+  element.classList.add('active');
+  
+  // Get the selected method
+  const method = element.getAttribute('data-value');
+  
+  // Update all 6 comparison images based on selected method
+  for (let i = 1; i <= 6; i++) {
+    const comparisonImage = document.getElementById(`comparison-image-${i}`);
+    if (comparisonImage) {
+      switch(method) {
+        case 'zhou':
+          comparisonImage.src = './static/images/input.png';
+          comparisonImage.setAttribute('data-hover', './static/images/output.png');
+          break;
+        case 'flare7k':
+          comparisonImage.src = './static/images/input.png';
+          comparisonImage.setAttribute('data-hover', './static/images/output.png');
+          break;
+        case 'mfdnet':
+          comparisonImage.src = './static/images/input.png';
+          comparisonImage.setAttribute('data-hover', './static/images/output.png');
+          break;
+        default:
+          comparisonImage.src = './static/images/input.png';
+          comparisonImage.setAttribute('data-hover', './static/images/output.png');
+      }
+    }
+  }
+  
+  // Reinitialize hover swap for all updated images
+  initImageHoverSwap();
+}
+
 $(document).ready(function() {
     // Check for click events on the navbar burger icon
     $(".navbar-burger").click(function() {
@@ -74,5 +143,7 @@ $(document).ready(function() {
     $('#interpolation-slider').prop('max', NUM_INTERP_FRAMES - 1);
 
     bulmaSlider.attach();
-
+    
+    // Initialize image hover swap
+    initImageHoverSwap();
 })
