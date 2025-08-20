@@ -324,20 +324,19 @@ input:checked+.slider:after {
 .neon-text {
   font-size: 3rem;
   font-weight: bold;
-  color: transparent;
-  background-image: linear-gradient(to right, #b8860b, #ffeb99);
+  color: #2c3e50;
+  /* 清晰的深色作為後備 */
+  background-image: linear-gradient(45deg, #1e3c72, #2a5298, #3498db);
+  /* 藍色漸變，更專業的色調 */
   background-clip: text;
   -webkit-background-clip: text;
-  text-shadow:
-    1px 1px 2px rgba(0, 0, 0, 0.2),
-    /* 輕微黑影增加對比 */
-    0 0 8px rgba(255, 255, 255, 0.5),
-    /* 柔白暈光，提升在白底上的可視性 */
-    0 0 12px rgba(255, 233, 167, 0.6),
-    0 0 24px rgba(255, 233, 167, 0.5),
-    0 0 36px rgba(255, 233, 167, 0.4),
-    0 0 50px rgba(255, 233, 167, 0.3);
-  animation: pulse 2s ease-in-out infinite;
+  -webkit-text-fill-color: transparent;
+  /* 只在支援的瀏覽器中使用透明效果 */
+  text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(52, 152, 219, 0.5),
+    0 0 25px rgba(52, 152, 219, 0.3);
+  /* 將 hover 效果設為常駐 */
 }
 
 @keyframes pulse {

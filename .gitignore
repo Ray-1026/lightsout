@@ -1,2 +1,9 @@
 .DS_store
 .idea
+
+# local / macOS / editor
+.DS_Store
+.vscode/
+
+# local large data / results we don't want in repo
+outpaint_rawgraph.key

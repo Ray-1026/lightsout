@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="./static/css/index.css">
   <!-- <link rel="stylesheet" href="./static/css/bootstrap.min.css"> -->
   <!-- <link rel="stylesheet" href="./static/css/app.css"> -->
-  <link rel="icon" href="./static/images/favicon.svg">
+  <link rel="icon" href="./static/images/favicon_new.svg">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -49,14 +49,14 @@
 </head>
 
 <body>
-
+ <!-- project name , author .... -->
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title neon-text">LightsOut <img src="static/images/favicon.svg" alt="icon"
-                style="height: 1em; "></h1>
+            <h1 class="title is-1 publication-title neon-text">LightsOut <img src="static/images/favicon_new.svg" alt="icon"
+                  style="height: 2.25em; "></h1>
             <h2 class="subtitle is-3 publication-subtitle"><strong>Diffusion-based Outpainting for Enhanced Lens Flare
                 Removal</strong></h2>
             <h3 class="subtitle is-3 publication-subtitle"><strong>ICCV 2025</strong></h3>
@@ -79,16 +79,6 @@
 
             <div class="column has-text-centered">
               <div class="publication-links">
-                <!-- PDF Link. -->
-                <!-- <span class="link-block">
-                <a href="https://arxiv.org/pdf/2011.12948"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span> -->
                 <span class="link-block">
                   <a href="" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
@@ -97,17 +87,6 @@
                     <span>arXiv</span>
                   </a>
                 </span>
-                <!-- Video Link. -->
-                <!-- <span class="link-block">
-                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
-              </span> -->
-                <!-- Code Link. -->
                 <span class="link-block">
                   <a href="https://github.com/Ray-1026/LightsOut-official"
                     class="external-link button is-normal is-rounded is-dark">
@@ -117,38 +96,6 @@
                     <span>Code</span>
                   </a>
                 </span>
-                <!-- Dataset Google Drive Link. -->
-                <!-- <span class="link-block"> -->
-                <!-- <a href="https://drive.google.com/drive/folders/1C0OqUSavUBwR_p_yNRBia90jvC-23hNN?usp=sharing"
-                    class="external-link button is-normal is-rounded is-dark"> -->
-                <!-- <span class="icon"> -->
-                <!-- <img src="https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png" width="20"
-                        height="20" alt="Google Drive"> -->
-                <!-- </span> -->
-                <!-- <span>Data (Google Drive)</span> -->
-                <!-- </a> -->
-                <!-- </span> -->
-                <!-- Dataset HF Link. -->
-                <!-- <span class="link-block"> -->
-                <!-- <a href="https://huggingface.co/datasets/kkennethwu/360-USID"
-                    class="external-link button is-normal is-rounded is-dark"> -->
-                <!-- <span class="icon"> -->
-                <!-- <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" width="20"
-                        height="20" alt="HF"> -->
-                <!-- </span> -->
-                <!-- <span>Data (HF)</span> -->
-                <!-- </a> -->
-                <!-- </span> -->
-                <!-- Results Link. -->
-                <!-- <span class="link-block"> -->
-                <!-- <a href="https://drive.google.com/drive/folders/1ujTKiBfTBD_BVv9YiifOl_SfG8sd0dZ6?usp=sharing"
-                    class="external-link button is-normal is-rounded is-dark"> -->
-                <!-- <span class="icon"> -->
-                <!-- <i class="far fa-images"></i> -->
-                <!-- </span> -->
-                <!-- <span>Evaluation Results</span> -->
-                <!-- </a> -->
-                <!-- </span> -->
               </div>
 
             </div>
@@ -158,23 +105,22 @@
     </div>
   </section>
 
+
+
+   <!-- teaser . -->
   <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
         <div class="pipeline-figure">
           <img src="./static/images/teaser.png" alt="Teaser" style="width: 100%;" />
         </div>
-        <h2 class="subtitle is-3 has-text-centered">
-          <!-- <span class="dnerf">AuraFusion360</span> can do inpainting in the 360° unbounded scene. -->
-          <span class="subtitle is-3 neon-text">LightsOut</span> ...
-        </h2>
       </div>
     </div>
   </section>
 
+   <!-- Video. -->
   <section class="section">
     <div class="container is-max-desktop">
-
       <!-- Video. -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
@@ -188,8 +134,13 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Abstract. -->
+  <!-- Abstract. -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
           <h2 class="title is-2">Abstract</h2>
@@ -207,9 +158,14 @@
           </div>
         </div>
       </div>
-      <!--/ Abstract. -->
+    </div>
+  </section>
 
-      <!-- Pipeline Fig. -->
+
+
+  <section class="section">
+  <!-- Pipeline Fig. -->
+   <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
           <h2 class="title is-2">Approach</h2>
@@ -232,8 +188,6 @@
           </div>
         </div>
       </div>
-      <!--/ Pipeline Fig. -->
-
     </div>
   </section>
 
@@ -362,6 +316,58 @@
       <!-- </div> -->
       <!-- Poster -->
 
+      <!-- Outpainting Result -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-2">Outpainting Result</h2>
+          <div class="comparison-grid" style="margin: 2rem 0;">
+            <div class="columns is-centered">
+              <div class="column is-3">
+                <div class="hover-swap-container">
+                  <img src="./outpaintresult/chosen/sdxl_flare7k_crop15_real_blend0092_2.png" data-hover="./outpaintresult/chosen/sdxl_flare7k_crop15_real_blend0092_1.png" alt="Outpainting 1" class="hover-swap-image" />
+                </div>
+              </div>
+              <div class="column is-3">
+                <div class="hover-swap-container">
+                  <img src="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0013_2.png" data-hover="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0013_1.png" alt="Outpainting 2" class="hover-swap-image" />
+                </div>
+              </div>
+              <div class="column is-3">
+                <div class="hover-swap-container">
+                  <img src="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0026_2.png" data-hover="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0026_1.png" alt="Outpainting 3" class="hover-swap-image" />
+                </div>
+              </div>
+              <div class="column is-3">
+                <div class="hover-swap-container">
+                  <img src="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0028_2.png" data-hover="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0028_1.png" alt="Outpainting 4" class="hover-swap-image" />
+                </div>
+              </div>
+            </div>
+            <div class="columns is-centered">
+              <div class="column is-3">
+                <div class="hover-swap-container">
+                  <img src="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0049_2.png" data-hover="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0049_1.png" alt="Outpainting 5" class="hover-swap-image" />
+                </div>
+              </div>
+              <div class="column is-3">
+                <div class="hover-swap-container">
+                  <img src="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0094_2.png" data-hover="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0094_1.png" alt="Outpainting 6" class="hover-swap-image" />
+                </div>
+              </div>
+              <div class="column is-3">
+                <div class="hover-swap-container">
+                  <img src="./outpaintresult/chosen/sdxl_mfdnet_crop15_real_blend0082_2.png" data-hover="./outpaintresult/chosen/sdxl_mfdnet_crop15_real_blend0082_1.png" alt="Outpainting 7" class="hover-swap-image" />
+                </div>
+              </div>
+              <div class="column is-3">
+                <div class="hover-swap-container">
+                  <img src="./outpaintresult/chosen/sdxl_mfdnet_crop15_syn_blend0056_2.png" data-hover="./outpaintresult/chosen/sdxl_mfdnet_crop15_syn_blend0056_1.png" alt="Outpainting 8" class="hover-swap-image" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Citation -->
       <div class="columns is-centered">
         <div class="column is-full-width">
@@ -369,31 +375,32 @@
           <div
             style="display: inline-block; text-align: left; max-width: 100%; background: #f5f5f5; padding: 10px; border-radius: 5px;">
             <textarea id="bibtex" style="display: none;">
-@InProceedings{,
-  author    = {},
-  title     = {},
-  booktitle = {},
-  month     = {},
-  year      = {},
-  pages     = {}
-}
-</textarea>
+            @InProceedings{,
+              author    = {},
+              title     = {},
+              booktitle = {},
+              month     = {},
+              year      = {},
+              pages     = {}
+            }
+            </textarea>
           </div>
         </div>
       </div>
-      <!-- Citation -->
-
-      <!-- Acknowledgements -->
-      <!-- <div class="columns is-centered"> -->
-      <!-- <div class="column is-full-width"> -->
-      <!-- <h2 class="title is-2">Acknowledgements</h2> -->
-      <!-- <div class="content has-text-justified"> -->
-      <!-- <p> -->
-      <!-- This work was supported by NVIDIA Taiwan AI Research & Development Center (TRDC). -->
-      <!-- </p> -->
-      <!-- </div> -->
-      <!-- </div> -->
-
+       <!-- Acknowledgements -->
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-2">Acknowledgements</h2>
+          <div class="content has-text-justified">
+            <p>
+              This research was funded by the National Science and Technology Council, Taiwan, under Grants NSTC
+              112-2222-E-A49-004-MY2 and 113-2628-E-A49-023-. The authors are grateful to Google, NVIDIA, and MediaTek
+              Inc. for their generous donations. Yu-Lun Liu acknowledges the Yushan Young Fellow Program by the MOE in
+              Taiwan.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
