@@ -406,6 +406,7 @@ input:checked+.slider:after {
   transition: transform 0.2s ease !important;
 }
 
-.comparison-grid .hover-swap-image:hover {
+/* 移除 hover 縮放效果，避免與 JavaScript hover 事件衝突 */
+/* .comparison-grid .hover-swap-image:hover {
   transform: scale(1.02) !important;
-}
+} */

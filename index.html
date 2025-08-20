@@ -204,82 +204,83 @@
           <!-- Method Selection Pills -->
           <div class="text-center">
             <ul class="nav nav-pills center-pills">
-              <li class="method-pill active" data-value="zhou" onclick="selectComparisonMethod(this)">
-                <a>Zhou, et al</a>
-              </li>
-              <li class="method-pill" data-value="flare7k" onclick="selectComparisonMethod(this)">
-                <a>Flare7K++</a>
-              </li>
-              <li class="method-pill" data-value="mfdnet" onclick="selectComparisonMethod(this)">
-                <a>MFDNet</a>
-              </li>
+              <li class="method-pill active" data-value="zhou" onclick="selectComparisonMethod(this)"><a>Zhou, et al</a></li>
+              <li class="method-pill" data-value="flare7k" onclick="selectComparisonMethod(this)"><a>Flare7K++</a></li>
+              <li class="method-pill" data-value="mfdnet" onclick="selectComparisonMethod(this)"><a>MFDNet</a></li>
             </ul>
           </div>
 
           <!-- Image Grid with Hover Swap -->
           <div class="comparison-grid" style="margin: 2rem 0;">
-            <!-- First Row -->
             <div class="columns is-centered">
-              <div class="column is-4">
-                <div class="hover-swap-container">
-                  <img id="comparison-image-1" 
-                       src="./static/images/input.png" 
-                       data-hover="./static/images/output.png" 
-                       alt="Comparison 1" 
-                       class="hover-swap-image" />
-                </div>
-              </div>
-              <div class="column is-4">
-                <div class="hover-swap-container">
-                  <img id="comparison-image-2" 
-                       src="./static/images/input.png" 
-                       data-hover="./static/images/output.png" 
-                       alt="Comparison 2" 
-                       class="hover-swap-image" />
-                </div>
-              </div>
-              <div class="column is-4">
-                <div class="hover-swap-container">
-                  <img id="comparison-image-3" 
-                       src="./static/images/input.png" 
-                       data-hover="./static/images/output.png" 
-                       alt="Comparison 3" 
-                       class="hover-swap-image" />
-                </div>
-              </div>
+              <div class="column is-4"><div class="hover-swap-container"><img id="comparison-image-1" class="hover-swap-image" /></div></div>
+              <div class="column is-4"><div class="hover-swap-container"><img id="comparison-image-2" class="hover-swap-image" /></div></div>
+              <div class="column is-4"><div class="hover-swap-container"><img id="comparison-image-3" class="hover-swap-image" /></div></div>
             </div>
-            
-            <!-- Second Row -->
             <div class="columns is-centered">
-              <div class="column is-4">
-                <div class="hover-swap-container">
-                  <img id="comparison-image-4" 
-                       src="./static/images/input.png" 
-                       data-hover="./static/images/output.png" 
-                       alt="Comparison 4" 
-                       class="hover-swap-image" />
-                </div>
-              </div>
-              <div class="column is-4">
-                <div class="hover-swap-container">
-                  <img id="comparison-image-5" 
-                       src="./static/images/input.png" 
-                       data-hover="./static/images/output.png" 
-                       alt="Comparison 5" 
-                       class="hover-swap-image" />
-                </div>
-              </div>
-              <div class="column is-4">
-                <div class="hover-swap-container">
-                  <img id="comparison-image-6" 
-                       src="./static/images/input.png" 
-                       data-hover="./static/images/output.png" 
-                       alt="Comparison 6" 
-                       class="hover-swap-image" />
-                </div>
-              </div>
+              <div class="column is-4"><div class="hover-swap-container"><img id="comparison-image-4" class="hover-swap-image" /></div></div>
+              <div class="column is-4"><div class="hover-swap-container"><img id="comparison-image-5" class="hover-swap-image" /></div></div>
+              <div class="column is-4"><div class="hover-swap-container"><img id="comparison-image-6" class="hover-swap-image" /></div></div>
             </div>
           </div>
+          <script>
+            // method: zhou, flare7k, mfdnet
+            const methodFiles = {
+              zhou: [
+                'res_000000.png', 'res_000002.png', 'res_000004.png', 'res_000009.png', 'res_000037.png', 'res_000096.png'
+              ],
+              flare7k: [
+                'res_000008.png', 'res_000010.png', 'res_000014.png', 'res_000032.png', 'res_000033.png', 'res_000036.png'
+              ],
+              mfdnet: [
+                'res_000018.png', 'res_000034.png', 'res_000050.png', 'res_000052.png', 'res_000074.png', 'res_000095.png'
+              ]
+            };
+            const inputFiles = [
+              'output_000000.png', 'output_000002.png', 'output_000004.png', 'output_000009.png', 'output_000037.png', 'output_000096.png',
+              'output_000008.png', 'output_000010.png', 'output_000014.png', 'output_000032.png', 'output_000033.png', 'output_000036.png',
+              'output_000018.png', 'output_000034.png', 'output_000050.png', 'output_000052.png', 'output_000074.png', 'output_000095.png'
+            ];
+            
+            // 重寫全局的 selectComparisonMethod 函數，確保它不會被 index.js 覆蓋
+            window.selectComparisonMethod = function(el) {
+              document.querySelectorAll('.method-pill').forEach(pill => pill.classList.remove('active'));
+              el.classList.add('active');
+              const method = el.getAttribute('data-value');
+              const files = methodFiles[method];
+              for (let i = 0; i < 6; i++) {
+                const img = document.getElementById('comparison-image-' + (i+1));
+                // 預設顯示 input 資料夾的照片
+                let inputIdx = inputFiles.indexOf('output_' + files[i].replace('res_', ''));
+                if (inputIdx === -1) inputIdx = 0;
+                img.src = `static/images/flare_remove/input/${inputFiles[inputIdx]}`;
+                img.setAttribute('data-hover', `static/images/flare_remove/${method}/${files[i]}`);
+                img.setAttribute('data-method', method);
+                img.setAttribute('data-idx', i);
+                img.alt = `Comparison ${i+1}`;
+              }
+            };
+            
+            document.addEventListener('DOMContentLoaded', function() {
+              selectComparisonMethod(document.querySelector('.method-pill.active'));
+              document.querySelectorAll('.hover-swap-image').forEach(img => {
+                img.addEventListener('mouseenter', function() {
+                  if (img.getAttribute('data-hover')) img.src = img.getAttribute('data-hover');
+                });
+                img.addEventListener('mouseleave', function() {
+                  // 回到 input 資料夾的照片
+                  const method = document.querySelector('.method-pill.active').getAttribute('data-value');
+                  const files = methodFiles[method];
+                  const idx = parseInt(img.id.split('-')[2], 10) - 1;
+                  let inputIdx = inputFiles.indexOf('output_' + files[idx].replace('res_', ''));
+                  if (inputIdx === -1) inputIdx = 0;
+                  img.src = `static/images/flare_remove/input/${inputFiles[inputIdx]}`;
+                  img.setAttribute('data-method', method);
+                  img.setAttribute('data-idx', idx);
+                });
+              });
+            });
+          </script>
           
           <p class="hover-instruction">Hover over any image to see the comparison results</p>
         </div>
@@ -320,54 +321,91 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
           <h2 class="title is-2">Outpainting Result</h2>
-          <div class="comparison-grid" style="margin: 2rem 0;">
+          <div class="comparison-grid outpainting-section" style="margin: 2rem 0;">
             <div class="columns is-centered">
               <div class="column is-3">
                 <div class="hover-swap-container">
-                  <img src="./outpaintresult/chosen/sdxl_flare7k_crop15_real_blend0092_2.png" data-hover="./outpaintresult/chosen/sdxl_flare7k_crop15_real_blend0092_1.png" alt="Outpainting 1" class="hover-swap-image" />
+                  <img src="./static/images/outpaintresult/chosen/sdxl_flare7k_crop15_real_blend0092_2.png" data-hover="./static/images/outpaintresult/chosen/sdxl_flare7k_crop15_real_blend0092_1.png" alt="Outpainting 1" class="hover-swap-image" />
                 </div>
               </div>
               <div class="column is-3">
                 <div class="hover-swap-container">
-                  <img src="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0013_2.png" data-hover="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0013_1.png" alt="Outpainting 2" class="hover-swap-image" />
+                  <img src="./static/images/outpaintresult/chosen/sdxl_lens_crop15_real_blend0013_2.png" data-hover="./static/images/outpaintresult/chosen/sdxl_lens_crop15_real_blend0013_1.png" alt="Outpainting 2" class="hover-swap-image" />
                 </div>
               </div>
               <div class="column is-3">
                 <div class="hover-swap-container">
-                  <img src="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0026_2.png" data-hover="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0026_1.png" alt="Outpainting 3" class="hover-swap-image" />
+                  <img src="./static/images/outpaintresult/chosen/sdxl_lens_crop15_real_blend0026_2.png" data-hover="./static/images/outpaintresult/chosen/sdxl_lens_crop15_real_blend0026_1.png" alt="Outpainting 3" class="hover-swap-image" />
                 </div>
               </div>
               <div class="column is-3">
                 <div class="hover-swap-container">
-                  <img src="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0028_2.png" data-hover="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0028_1.png" alt="Outpainting 4" class="hover-swap-image" />
+                  <img src="./static/images/outpaintresult/chosen/sdxl_lens_crop15_real_blend0028_2.png" data-hover="./static/images/outpaintresult/chosen/sdxl_lens_crop15_real_blend0028_1.png" alt="Outpainting 4" class="hover-swap-image" />
                 </div>
               </div>
             </div>
             <div class="columns is-centered">
               <div class="column is-3">
                 <div class="hover-swap-container">
-                  <img src="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0049_2.png" data-hover="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0049_1.png" alt="Outpainting 5" class="hover-swap-image" />
+                  <img src="./static/images/outpaintresult/chosen/sdxl_lens_crop15_real_blend0049_2.png" data-hover="./static/images/outpaintresult/chosen/sdxl_lens_crop15_real_blend0049_1.png" alt="Outpainting 5" class="hover-swap-image" />
                 </div>
               </div>
               <div class="column is-3">
                 <div class="hover-swap-container">
-                  <img src="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0094_2.png" data-hover="./outpaintresult/chosen/sdxl_lens_crop15_real_blend0094_1.png" alt="Outpainting 6" class="hover-swap-image" />
+                  <img src="./static/images/outpaintresult/chosen/sdxl_lens_crop15_real_blend0094_2.png" data-hover="./static/images/outpaintresult/chosen/sdxl_lens_crop15_real_blend0094_1.png" alt="Outpainting 6" class="hover-swap-image" />
                 </div>
               </div>
               <div class="column is-3">
                 <div class="hover-swap-container">
-                  <img src="./outpaintresult/chosen/sdxl_mfdnet_crop15_real_blend0082_2.png" data-hover="./outpaintresult/chosen/sdxl_mfdnet_crop15_real_blend0082_1.png" alt="Outpainting 7" class="hover-swap-image" />
+                  <img src="./static/images/outpaintresult/chosen/sdxl_mfdnet_crop15_real_blend0082_2.png" data-hover="./static/images/outpaintresult/chosen/sdxl_mfdnet_crop15_real_blend0082_1.png" alt="Outpainting 7" class="hover-swap-image" />
                 </div>
               </div>
               <div class="column is-3">
                 <div class="hover-swap-container">
-                  <img src="./outpaintresult/chosen/sdxl_mfdnet_crop15_syn_blend0056_2.png" data-hover="./outpaintresult/chosen/sdxl_mfdnet_crop15_syn_blend0056_1.png" alt="Outpainting 8" class="hover-swap-image" />
+                  <img src="./static/images/outpaintresult/chosen/sdxl_mfdnet_crop15_syn_blend0056_2.png" data-hover="./static/images/outpaintresult/chosen/sdxl_mfdnet_crop15_syn_blend0056_1.png" alt="Outpainting 8" class="hover-swap-image" />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      
+      <!-- 為 Outpainting Result 區域添加 hover 事件處理 -->
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          // 只為 Outpainting Result 區域的圖片添加 hover 事件
+          const outpaintingImages = document.querySelectorAll('.outpainting-section .hover-swap-image');
+          outpaintingImages.forEach(img => {
+            // 存儲原始圖片路徑
+            if (!img.dataset.originalSrc) {
+              img.dataset.originalSrc = img.src;
+            }
+            
+            const originalSrc = img.dataset.originalSrc;
+            const hoverSrc = img.getAttribute('data-hover');
+            
+            if (hoverSrc) {
+              // 移除現有的事件監聽器
+              img.onmouseenter = null;
+              img.onmouseleave = null;
+              
+              // 預載入 hover 圖片
+              const hoverImage = new Image();
+              hoverImage.src = hoverSrc;
+              
+              // 添加新的事件監聽器
+              img.onmouseenter = function() {
+                this.src = hoverSrc;
+              };
+              
+              img.onmouseleave = function() {
+                this.src = originalSrc;
+              };
+            }
+          });
+        });
+      </script>
+      
       <!-- Citation -->
       <div class="columns is-centered">
         <div class="column is-full-width">

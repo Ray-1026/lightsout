@@ -20,89 +20,22 @@ function setInterpolationImage(i) {
 }
 
 
-// Image Hover Swap functionality
+// Image Hover Swap functionality - 已移至 HTML 內嵌腳本中處理
+// 此函數保留但不使用，實際的邏輯已移至 HTML 中
 function initImageHoverSwap() {
-  const hoverImages = document.querySelectorAll('.hover-swap-image');
-  
-  hoverImages.forEach(img => {
-    // Store original source
-    if (!img.dataset.originalSrc) {
-      img.dataset.originalSrc = img.src;
-    }
-    
-    const originalSrc = img.dataset.originalSrc;
-    const hoverSrc = img.getAttribute('data-hover');
-    
-    if (hoverSrc) {
-      // Remove existing event listeners
-      img.onmouseenter = null;
-      img.onmouseleave = null;
-      
-      // Preload the hover image
-      const hoverImage = new Image();
-      hoverImage.src = hoverSrc;
-      
-      // Add new event listeners
-      img.onmouseenter = function() {
-        this.src = hoverSrc;
-      };
-      
-      img.onmouseleave = function() {
-        this.src = originalSrc;
-      };
-    }
-  });
+  // 此函數保留但不使用，實際的邏輯已移至 HTML 中
+  console.log('Legacy initImageHoverSwap called - not used');
 }
 
-// Method selection for comparison
-function selectComparisonMethod(element) {
-  console.log('selectComparisonMethod called', element);
-  
-  // Remove active class from all method pills
-  document.querySelectorAll('.method-pill').forEach(pill => {
-    pill.classList.remove('active');
-  });
-  
-  // Add active class to selected pill
-  element.classList.add('active');
-  
-  // Get the selected method
-  const method = element.getAttribute('data-value');
-  console.log('Selected method:', method);
-  
-  // Update all 6 comparison images based on selected method
-  for (let i = 1; i <= 6; i++) {
-    const comparisonImage = document.getElementById(`comparison-image-${i}`);
-    if (comparisonImage) {
-      switch(method) {
-        case 'zhou':
-          comparisonImage.src = './static/images/input.png';
-          comparisonImage.setAttribute('data-hover', './static/images/output.png');
-          break;
-        case 'flare7k':
-          comparisonImage.src = './static/images/input.png';
-          comparisonImage.setAttribute('data-hover', './static/images/output.png');
-          break;
-        case 'mfdnet':
-          comparisonImage.src = './static/images/input.png';
-          comparisonImage.setAttribute('data-hover', './static/images/output.png');
-          break;
-        default:
-          comparisonImage.src = './static/images/input.png';
-          comparisonImage.setAttribute('data-hover', './static/images/output.png');
-      }
-    }
-  }
-  
-  // Reinitialize hover swap for all updated images
-  setTimeout(function() {
-    initImageHoverSwap();
-  }, 50);
+// Method selection for comparison - 已移至 HTML 內嵌腳本中處理
+// 此函數已被重寫以避免與 HTML 中的實現衝突
+function selectComparisonMethodLegacy(element) {
+  // 此函數保留但不使用，實際的邏輯已移至 HTML 中
+  console.log('Legacy selectComparisonMethod called - not used');
 }
 
 $(document).ready(function() {
-    // Initialize image hover swap first
-    initImageHoverSwap();
+    // 移除 image hover swap 初始化，因為已移至 HTML 內嵌腳本中處理
     
     // Check for click events on the navbar burger icon
     $(".navbar-burger").click(function() {
@@ -158,8 +91,5 @@ $(document).ready(function() {
 
     bulmaSlider.attach();
     
-    // Initialize image hover swap at the end
-    setTimeout(function() {
-      initImageHoverSwap();
-    }, 100);
+    // 移除重複的 image hover swap 初始化
 })
