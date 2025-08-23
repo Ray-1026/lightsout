@@ -7,6 +7,7 @@
   <meta name="keywords" content="LightsOut, Lens Flare Removal, Outpainting, Diffusion Model">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LightsOut</title>
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
   <script>
@@ -22,7 +23,6 @@
   </script>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
@@ -46,20 +46,116 @@
   <script src="./static/js/index.js"></script>
   <script src="./static/js/video_comparison.js"></script>
   <script src="./static/js/app.js"></script>
+
+  <style>
+    :root {
+      --bg-0: 12, 12, 16;
+      --bg-1: 18, 18, 26;
+      --txt: 235, 236, 242;
+      --acc: 106, 209, 255;
+      --grid: 255, 255, 255;
+      --noise-opacity: 0.035;
+    }
+
+    body {
+      margin: 0;
+      color: rgb(var(--txt));
+      background: radial-gradient(1200px 800px at 50% -10%, rgba(60, 60, 90, .25), rgba(0, 0, 0, 0)),
+        linear-gradient(180deg, rgb(var(--bg-0)) 0%, rgb(var(--bg-1)) 100%);
+      overflow-x: hidden;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .45;
+      mix-blend-mode: screen;
+      background:
+        radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, .35), rgba(255, 255, 255, 0) 60%),
+        radial-gradient(1px 1px at 70% 60%, rgba(255, 255, 255, .25), rgba(255, 255, 255, 0) 60%),
+        radial-gradient(1.5px 1.5px at 40% 80%, rgba(255, 255, 255, .3), rgba(255, 255, 255, 0) 60%);
+      animation: twinkle 6s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes twinkle {
+      to {
+        opacity: .75;
+        filter: hue-rotate(10deg) brightness(1.15)
+      }
+    }
+
+    .grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .06;
+      background-image:
+        linear-gradient(to right, rgba(var(--grid), .18) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(var(--grid), .18) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(1000px 600px at 50% 30%, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+      z-index: 0;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: var(--noise-opacity);
+      mix-blend-mode: overlay;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.7"/></svg>');
+      z-index: 0;
+    }
+
+    .flare {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: screen;
+      background:
+        radial-gradient(160px 160px at var(--x, 50%) var(--y, 40%), rgba(255, 255, 240, .18), rgba(255, 255, 240, 0) 60%),
+        radial-gradient(600px 300px at calc(var(--x, 50%) + 10%) calc(var(--y, 40%) - 6%), rgba(106, 209, 255, .10), rgba(106, 209, 255, 0) 70%),
+        radial-gradient(1000px 800px at 50% 10%, rgba(140, 120, 255, .08), rgba(0, 0, 0, 0) 70%);
+      filter: saturate(120%) blur(.2px);
+    }
+
+    .streak {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      mix-blend-mode: screen;
+      background:
+        conic-gradient(from 0deg at var(--x, 50%) var(--y, 40%), rgba(255, 255, 255, .0), rgba(255, 255, 255, .25) 2deg, rgba(255, 255, 255, 0) 14deg) 0 0/100% 100% no-repeat;
+      opacity: .6;
+      filter: blur(8px) contrast(120%);
+      mask-image: radial-gradient(800px 500px at var(--x, 50%) var(--y, 40%), rgba(0, 0, 0, 1), rgba(0, 0, 0, 0) 70%);
+    }
+  </style>
 </head>
 
 <body>
- <!-- project name , author .... -->
+  <!-- Background Effects -->
+  <div class="stars"></div>
+  <div class="grid"></div>
+  <div class="noise"></div>
+  <div class="flare" aria-hidden="true"></div>
+  <div class="streak" aria-hidden="true"></div>
+
+  <!-- project name , author .... -->
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title neon-text">LightsOut <img src="static/images/favicon_new.svg" alt="icon"
-                  style="height: 2.25em; "></h1>
-            <h2 class="subtitle is-3 publication-subtitle"><strong>Diffusion-based Outpainting for Enhanced Lens Flare
-                Removal</strong></h2>
-            <h3 class="subtitle is-3 publication-subtitle"><strong>ICCV 2025</strong></h3>
+            <h1 class="title is-1 publication-title neon-text">LightsOut <img src="static/images/favicon_new.svg"
+                alt="icon" style="height: 2.25em; "></h1>
+            <h2 class="subtitle is-3 publication-subtitle highlight">Diffusion-based Outpainting for Enhanced Lens Flare
+              Removal</h2>
+            <h3 class="subtitle is-3 publication-subtitle highlight">ICCV 2025</h3>
             <div class="is-size-4 publication-authors">
               <span class="author-block">
                 <a href="">Shr-Ruei Tsai</a>,</span>
@@ -106,8 +202,7 @@
   </section>
 
 
-
-   <!-- teaser . -->
+  <!-- teaser . -->
   <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
@@ -118,29 +213,29 @@
     </div>
   </section>
 
-   <!-- Video. -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <!-- Video. -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-full-width">
-          <h2 class="title is-2">Video</h2>
-          <div class="video-container"
-            style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px;">
-            <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px;" src=""
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Video. -->
+  <!-- <section class="section"> -->
+  <!-- <div class="container is-max-desktop"> -->
+  <!-- Video. -->
+  <!-- <div class="columns is-centered has-text-centered"> -->
+  <!-- <div class="column is-full-width"> -->
+  <!-- <h2 class="title is-2">Video</h2> -->
+  <!-- <div class="video-container" -->
+  <!-- style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px;"> -->
+  <!-- <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px;" src="" -->
+  <!-- frameborder="0" -->
+  <!-- allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" -->
+  <!-- allowfullscreen></iframe> -->
+  <!-- </div> -->
+  <!-- </div> -->
+  <!-- </div> -->
+  <!-- </div> -->
+  <!-- </section> -->
 
   <!-- Abstract. -->
   <section class="section">
     <div class="container is-max-desktop">
-      
+
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
           <h2 class="title is-2">Abstract</h2>
@@ -164,26 +259,27 @@
 
 
   <section class="section">
-  <!-- Pipeline Fig. -->
-   <div class="container is-max-desktop">
+    <!-- Pipeline Fig. -->
+    <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <h2 class="title is-2">Approach</h2>
+          <h2 class="title is-2">Pipeline</h2>
           <div class="pipeline-figure">
-            <img src="./static/images/pipeline.png" alt="Pipeline" style="width: 95%;" />
+            <img src="./static/images/pipeline.png" alt="Pipeline" style="width: 100%;" />
           </div>
           <div class="content has-text-justified">
             <p>
-              (a) <strong>Light source prediction and conditioning</strong>: We introduce a multitask regression module
+              (a) <span class="highlight">Light source prediction and conditioning</span>: We introduce a multitask
+              regression module
               to accurately predict off-frame or incomplete light source parameters (positions, radii, and confidences).
               These predicted parameters guide a rendering function to generate the corresponding light source mask. (b)
-              <strong>Light source outpainting</strong>: Leveraging a LoRA fine-tuned diffusion-based inpainting model
-              with light source conditioning, our approach accurately outpaints both missing off-frame light sources and
-              associated flare artifacts, producing visually coherent and realistic results. (c) <strong>SIFR
-                boosting</strong>: Our generated outpainted images serve as enhanced inputs to existing SIFR methods,
-              significantly improving their performance on previously challenging scenarios with incomplete light source
-              information. The proposed pipeline thus effectively operates as a plug-and-play module to boost existing
-              flare removal models.
+              <span class="highlight">Light source outpainting</span>: Leveraging a LoRA fine-tuned diffusion-based
+              inpainting model with light source conditioning, our approach accurately outpaints both missing off-frame
+              light sources and associated flare artifacts, producing visually coherent and realistic results. (c) <span
+                class="highlight">SIFR boosting</span>: Our generated outpainted images serve as enhanced inputs to
+              existing SIFR methods, significantly improving their performance on previously challenging scenarios with
+              incomplete light source information. The proposed pipeline thus effectively operates as a plug-and-play
+              module to boost existing flare removal models.
             </p>
           </div>
         </div>
@@ -200,11 +296,12 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
           <h2 class="title is-2">Visualization Results</h2>
-          
+
           <!-- Method Selection Pills -->
           <div class="text-center">
             <ul class="nav nav-pills center-pills">
-              <li class="method-pill active" data-value="zhou" onclick="selectComparisonMethod(this)"><a>Zhou, et al</a></li>
+              <li class="method-pill active" data-value="zhou" onclick="selectComparisonMethod(this)"><a>Zhou, et al</a>
+              </li>
               <li class="method-pill" data-value="flare7k" onclick="selectComparisonMethod(this)"><a>Flare7K++</a></li>
               <li class="method-pill" data-value="mfdnet" onclick="selectComparisonMethod(this)"><a>MFDNet</a></li>
             </ul>
@@ -213,14 +310,26 @@
           <!-- Image Grid with Hover Swap -->
           <div class="comparison-grid" style="margin: 2rem 0;">
             <div class="columns is-centered">
-              <div class="column is-4"><div class="hover-swap-container"><img id="comparison-image-1" class="hover-swap-image" /></div></div>
-              <div class="column is-4"><div class="hover-swap-container"><img id="comparison-image-2" class="hover-swap-image" /></div></div>
-              <div class="column is-4"><div class="hover-swap-container"><img id="comparison-image-3" class="hover-swap-image" /></div></div>
+              <div class="column is-4">
+                <div class="hover-swap-container"><img id="comparison-image-1" class="hover-swap-image" /></div>
+              </div>
+              <div class="column is-4">
+                <div class="hover-swap-container"><img id="comparison-image-2" class="hover-swap-image" /></div>
+              </div>
+              <div class="column is-4">
+                <div class="hover-swap-container"><img id="comparison-image-3" class="hover-swap-image" /></div>
+              </div>
             </div>
             <div class="columns is-centered">
-              <div class="column is-4"><div class="hover-swap-container"><img id="comparison-image-4" class="hover-swap-image" /></div></div>
-              <div class="column is-4"><div class="hover-swap-container"><img id="comparison-image-5" class="hover-swap-image" /></div></div>
-              <div class="column is-4"><div class="hover-swap-container"><img id="comparison-image-6" class="hover-swap-image" /></div></div>
+              <div class="column is-4">
+                <div class="hover-swap-container"><img id="comparison-image-4" class="hover-swap-image" /></div>
+              </div>
+              <div class="column is-4">
+                <div class="hover-swap-container"><img id="comparison-image-5" class="hover-swap-image" /></div>
+              </div>
+              <div class="column is-4">
+                <div class="hover-swap-container"><img id="comparison-image-6" class="hover-swap-image" /></div>
+              </div>
             </div>
           </div>
           <script>
@@ -241,15 +350,15 @@
               'output_000008.png', 'output_000010.png', 'output_000014.png', 'output_000032.png', 'output_000033.png', 'output_000036.png',
               'output_000018.png', 'output_000034.png', 'output_000050.png', 'output_000052.png', 'output_000074.png', 'output_000095.png'
             ];
-            
+
             // 重寫全局的 selectComparisonMethod 函數，確保它不會被 index.js 覆蓋
-            window.selectComparisonMethod = function(el) {
+            window.selectComparisonMethod = function (el) {
               document.querySelectorAll('.method-pill').forEach(pill => pill.classList.remove('active'));
               el.classList.add('active');
               const method = el.getAttribute('data-value');
               const files = methodFiles[method];
               for (let i = 0; i < 6; i++) {
-                const img = document.getElementById('comparison-image-' + (i+1));
+                const img = document.getElementById('comparison-image-' + (i + 1));
                 // 預設顯示 input 資料夾的照片
                 let inputIdx = inputFiles.indexOf('output_' + files[i].replace('res_', ''));
                 if (inputIdx === -1) inputIdx = 0;
@@ -257,17 +366,17 @@
                 img.setAttribute('data-hover', `static/images/flare_remove/${method}/${files[i]}`);
                 img.setAttribute('data-method', method);
                 img.setAttribute('data-idx', i);
-                img.alt = `Comparison ${i+1}`;
+                img.alt = `Comparison ${i + 1}`;
               }
             };
-            
-            document.addEventListener('DOMContentLoaded', function() {
+
+            document.addEventListener('DOMContentLoaded', function () {
               selectComparisonMethod(document.querySelector('.method-pill.active'));
               document.querySelectorAll('.hover-swap-image').forEach(img => {
-                img.addEventListener('mouseenter', function() {
+                img.addEventListener('mouseenter', function () {
                   if (img.getAttribute('data-hover')) img.src = img.getAttribute('data-hover');
                 });
-                img.addEventListener('mouseleave', function() {
+                img.addEventListener('mouseleave', function () {
                   // 回到 input 資料夾的照片
                   const method = document.querySelector('.method-pill.active').getAttribute('data-value');
                   const files = methodFiles[method];
@@ -281,7 +390,7 @@
               });
             });
           </script>
-          
+
           <p class="hover-instruction">Hover over any image to see the comparison results</p>
         </div>
       </div>
@@ -290,7 +399,8 @@
       <div class="columns is-centered">
         <div class="column is-full-width">
           <p class="text-justify" style="text-align: center;">
-            Compare our LightsOut method with different baseline approaches. Select a method above and hover over the image to see the before/after comparison.
+            Compare our LightsOut method with different baseline approaches. Select a method above and hover over the
+            image to see the before/after comparison.
           </p>
         </div>
       </div>
@@ -325,54 +435,70 @@
             <div class="columns is-centered">
               <div class="column is-3">
                 <div class="hover-swap-container">
-                  <img src="./static/images/outpaintresult/input/output_000007_1.png" data-hover="./static/images/outpaintresult/result/blend_000007_2.png" alt="Outpainting 1" class="hover-swap-image" />
+                  <img src="./static/images/outpaintresult/input/output_000007_1.png"
+                    data-hover="./static/images/outpaintresult/result/blend_000007_2.png" alt="Outpainting 1"
+                    class="hover-swap-image" />
                 </div>
               </div>
               <div class="column is-3">
                 <div class="hover-swap-container">
-                  <img src="./static/images/outpaintresult/input/output_000026_1.png" data-hover="./static/images/outpaintresult/result/blend_000026_2.png" alt="Outpainting 2" class="hover-swap-image" />
+                  <img src="./static/images/outpaintresult/input/output_000026_1.png"
+                    data-hover="./static/images/outpaintresult/result/blend_000026_2.png" alt="Outpainting 2"
+                    class="hover-swap-image" />
                 </div>
               </div>
               <div class="column is-3">
                 <div class="hover-swap-container">
-                  <img src="./static/images/outpaintresult/input/output_000044_1.png" data-hover="./static/images/outpaintresult/result/blend_000044_2.png" alt="Outpainting 3" class="hover-swap-image" />
+                  <img src="./static/images/outpaintresult/input/output_000044_1.png"
+                    data-hover="./static/images/outpaintresult/result/blend_000044_2.png" alt="Outpainting 3"
+                    class="hover-swap-image" />
                 </div>
               </div>
               <div class="column is-3">
                 <div class="hover-swap-container">
-                  <img src="./static/images/outpaintresult/input/output_000053_1.png" data-hover="./static/images/outpaintresult/result/blend_000053_2.png" alt="Outpainting 4" class="hover-swap-image" />
+                  <img src="./static/images/outpaintresult/input/output_000053_1.png"
+                    data-hover="./static/images/outpaintresult/result/blend_000053_2.png" alt="Outpainting 4"
+                    class="hover-swap-image" />
                 </div>
               </div>
             </div>
             <div class="columns is-centered">
               <div class="column is-3">
                 <div class="hover-swap-container">
-                  <img src="./static/images/outpaintresult/input/output_000056_1.png" data-hover="./static/images/outpaintresult/result/blend_000056_2.png" alt="Outpainting 5" class="hover-swap-image" />
+                  <img src="./static/images/outpaintresult/input/output_000056_1.png"
+                    data-hover="./static/images/outpaintresult/result/blend_000056_2.png" alt="Outpainting 5"
+                    class="hover-swap-image" />
                 </div>
               </div>
               <div class="column is-3">
                 <div class="hover-swap-container">
-                  <img src="./static/images/outpaintresult/input/output_000066_1.png" data-hover="./static/images/outpaintresult/result/blend_000066_2.png" alt="Outpainting 6" class="hover-swap-image" />
+                  <img src="./static/images/outpaintresult/input/output_000066_1.png"
+                    data-hover="./static/images/outpaintresult/result/blend_000066_2.png" alt="Outpainting 6"
+                    class="hover-swap-image" />
                 </div>
               </div>
               <div class="column is-3">
                 <div class="hover-swap-container">
-                  <img src="./static/images/outpaintresult/input/output_000070_1.png" data-hover="./static/images/outpaintresult/result/blend_000070_2.png" alt="Outpainting 7" class="hover-swap-image" />
+                  <img src="./static/images/outpaintresult/input/output_000070_1.png"
+                    data-hover="./static/images/outpaintresult/result/blend_000070_2.png" alt="Outpainting 7"
+                    class="hover-swap-image" />
                 </div>
               </div>
               <div class="column is-3">
                 <div class="hover-swap-container">
-                  <img src="./static/images/outpaintresult/input/output_000083_1.png" data-hover="./static/images/outpaintresult/result/blend_000083_2.png" alt="Outpainting 8" class="hover-swap-image" />
+                  <img src="./static/images/outpaintresult/input/output_000083_1.png"
+                    data-hover="./static/images/outpaintresult/result/blend_000083_2.png" alt="Outpainting 8"
+                    class="hover-swap-image" />
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      
+
       <!-- 為 Outpainting Result 區域添加 hover 事件處理 -->
       <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
           // 只為 Outpainting Result 區域的圖片添加 hover 事件
           const outpaintingImages = document.querySelectorAll('.outpainting-section .hover-swap-image');
           outpaintingImages.forEach(img => {
@@ -380,52 +506,55 @@
             if (!img.dataset.originalSrc) {
               img.dataset.originalSrc = img.src;
             }
-            
+
             const originalSrc = img.dataset.originalSrc;
             const hoverSrc = img.getAttribute('data-hover');
-            
+
             if (hoverSrc) {
               // 移除現有的事件監聽器
               img.onmouseenter = null;
               img.onmouseleave = null;
-              
+
               // 預載入 hover 圖片
               const hoverImage = new Image();
               hoverImage.src = hoverSrc;
-              
+
               // 添加新的事件監聽器
-              img.onmouseenter = function() {
+              img.onmouseenter = function () {
                 this.src = hoverSrc;
               };
-              
-              img.onmouseleave = function() {
+
+              img.onmouseleave = function () {
                 this.src = originalSrc;
               };
             }
           });
         });
       </script>
-      
+
       <!-- Citation -->
       <div class="columns is-centered">
         <div class="column is-full-width">
           <h2 class="title is-2">BibTeX</h2>
-          <div
-            style="display: inline-block; text-align: left; max-width: 100%; background: #f5f5f5; padding: 10px; border-radius: 5px;">
-            <textarea id="bibtex" style="display: none;">
-            @InProceedings{,
-              author    = {},
-              title     = {},
-              booktitle = {},
-              month     = {},
-              year      = {},
-              pages     = {}
-            }
-            </textarea>
+          <div class="content has-text-justified">
+            <pre style="
+        background: rgba(60, 60, 90, .25);
+        color: #fff; 
+        padding: 16px; 
+        border-radius: 8px; 
+        line-height: 1.5; 
+        overflow-x: auto;
+      "><code>@inproceedings{tsai2025lightsout,
+  title     = {LightsOut: Diffusion-based Outpainting for Enhanced Lens Flare Removal},
+  author    = {Tsai, Shr-Ruei and Chang, Wei-Cheng and Lee, Jie-Ying and Su, Chih-Hai and Liu, Yu-Lun},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  year      = {2025}
+}</code></pre>
           </div>
         </div>
       </div>
-       <!-- Acknowledgements -->
+
+      <!-- Acknowledgements -->
       <div class="columns is-centered">
         <div class="column is-full-width">
           <h2 class="title is-2">Acknowledgements</h2>
@@ -466,6 +595,24 @@
     </div>
   </footer>
 
+
+  <!-- Scripts -->
+  <script>
+    function setPos(x, y) {
+      document.documentElement.style.setProperty('--x', x + 'px');
+      document.documentElement.style.setProperty('--y', y + 'px');
+    }
+    function updateFromEvent(e) {
+      let x, y;
+      if (e.touches && e.touches[0]) {
+        x = e.touches[0].clientX; y = e.touches[0].clientY;
+      } else { x = e.clientX; y = e.clientY; }
+      setPos(x, y);
+    }
+    setPos(window.innerWidth * 0.5, window.innerHeight * 0.35);
+    window.addEventListener('mousemove', updateFromEvent, { passive: true });
+    window.addEventListener('touchmove', updateFromEvent, { passive: true });
+  </script>
 </body>
 
 </html>

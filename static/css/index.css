@@ -368,7 +368,7 @@ input:checked+.slider:after {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   /* 只在支援的瀏覽器中使用透明效果 */
-  text-shadow: 
+  text-shadow:
     0 1px 2px rgba(255, 255, 255, 0.4),
     0 0 15px rgba(74, 158, 255, 0.8),
     0 0 25px rgba(74, 158, 255, 0.6);
@@ -446,3 +446,13 @@ input:checked+.slider:after {
 /* .comparison-grid .hover-swap-image:hover {
   transform: scale(1.02) !important;
 } */
+
+.highlight {
+  font-weight: 700;
+  /* 粗體 */
+  color: #ffffff;
+  /* 亮色（白色） */
+  /* text-shadow: 0 0 6px rgba(106, 209, 255, 0.8),
+    0 0 12px rgba(180, 140, 255, 0.6); */
+  /* 可選：發光效果 */
+}
