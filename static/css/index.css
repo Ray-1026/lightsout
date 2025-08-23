@@ -85,7 +85,9 @@ body {
 }
 
 .author-block {
+  /* display: inline-block; */
   display: inline-block;
+  margin-right: 15px;
 }
 
 .publication-banner img {}
