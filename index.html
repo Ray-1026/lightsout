@@ -311,27 +311,28 @@
           <div class="comparison-grid" style="margin: 2rem 0;">
             <div class="columns is-centered">
               <div class="column is-4">
-                <div class="hover-swap-container"><img id="comparison-image-1" class="hover-swap-image" /></div>
+                <div class="slider-compare" id="slider-compare-1"></div>
               </div>
               <div class="column is-4">
-                <div class="hover-swap-container"><img id="comparison-image-2" class="hover-swap-image" /></div>
+                <div class="slider-compare" id="slider-compare-2"></div>
               </div>
               <div class="column is-4">
-                <div class="hover-swap-container"><img id="comparison-image-3" class="hover-swap-image" /></div>
+                <div class="slider-compare" id="slider-compare-3"></div>
               </div>
             </div>
             <div class="columns is-centered">
               <div class="column is-4">
-                <div class="hover-swap-container"><img id="comparison-image-4" class="hover-swap-image" /></div>
+                <div class="slider-compare" id="slider-compare-4"></div>
               </div>
               <div class="column is-4">
-                <div class="hover-swap-container"><img id="comparison-image-5" class="hover-swap-image" /></div>
+                <div class="slider-compare" id="slider-compare-5"></div>
               </div>
               <div class="column is-4">
-                <div class="hover-swap-container"><img id="comparison-image-6" class="hover-swap-image" /></div>
+                <div class="slider-compare" id="slider-compare-6"></div>
               </div>
             </div>
           </div>
+
           <script>
             // method: zhou, flare7k, mfdnet
             const methodFiles = {
@@ -351,59 +352,111 @@
               'output_000018.png', 'output_000034.png', 'output_000050.png', 'output_000052.png', 'output_000074.png', 'output_000095.png'
             ];
 
-            // 重寫全局的 selectComparisonMethod 函數，確保它不會被 index.js 覆蓋
+            function createSliderCompare(container, beforeSrc, afterSrc, idx) {
+              container.innerHTML = '';
+              // Before image
+              const beforeImg = document.createElement('img');
+              beforeImg.src = beforeSrc;
+              beforeImg.alt = 'Before';
+              beforeImg.draggable = false;
+              container.appendChild(beforeImg);
+              // After image
+              const afterImg = document.createElement('img');
+              afterImg.src = afterSrc;
+              afterImg.alt = 'After';
+              afterImg.style.clipPath = 'inset(0 0 0 50%)';
+              afterImg.draggable = false;
+              afterImg.className = 'after-img';
+              container.appendChild(afterImg);
+              // Slider bar
+              const bar = document.createElement('div');
+              bar.className = 'slider-bar';
+              container.appendChild(bar);
+              // Slider handle
+              const handle = document.createElement('div');
+              handle.className = 'slider-handle';
+              container.appendChild(handle);
+              // Labels
+              // const labelLeft = document.createElement('div');
+              // labelLeft.className = 'slider-label left';
+              // labelLeft.textContent = 'Baseline';
+              // container.appendChild(labelLeft);
+              // const labelRight = document.createElement('div');
+              // labelRight.className = 'slider-label right';
+              // labelRight.textContent = '+Ours';
+              // container.appendChild(labelRight);
+
+              // Drag logic
+              let dragging = false;
+              let sliderPos = 0.5;
+              function setSlider(pos) {
+                sliderPos = Math.max(0.02, Math.min(0.98, pos));
+                const percent = sliderPos * 100;
+                afterImg.style.clipPath = `inset(0 0 0 ${percent}%)`;
+                bar.style.left = `${percent}%`;
+                handle.style.left = `${percent}%`;
+              }
+              setSlider(0.5);
+              function onDrag(e) {
+                if (!dragging) return;
+                let x;
+                if (e.touches && e.touches[0]) {
+                  x = e.touches[0].clientX;
+                } else {
+                  x = e.clientX;
+                }
+                const rect = container.getBoundingClientRect();
+                const pos = (x - rect.left) / rect.width;
+                setSlider(pos);
+              }
+              handle.addEventListener('mousedown', function (e) { dragging = true; e.preventDefault(); });
+              bar.addEventListener('mousedown', function (e) { dragging = true; e.preventDefault(); });
+              window.addEventListener('mousemove', onDrag);
+              window.addEventListener('mouseup', function () { dragging = false; });
+              handle.addEventListener('touchstart', function (e) { dragging = true; });
+              bar.addEventListener('touchstart', function (e) { dragging = true; });
+              window.addEventListener('touchmove', onDrag);
+              window.addEventListener('touchend', function () { dragging = false; });
+              container.addEventListener('click', function (e) {
+                const rect = container.getBoundingClientRect();
+                const pos = (e.clientX - rect.left) / rect.width;
+                setSlider(pos);
+              });
+            }
+
             window.selectComparisonMethod = function (el) {
               document.querySelectorAll('.method-pill').forEach(pill => pill.classList.remove('active'));
               el.classList.add('active');
               const method = el.getAttribute('data-value');
               const files = methodFiles[method];
               for (let i = 0; i < 6; i++) {
-                const img = document.getElementById('comparison-image-' + (i + 1));
-                // 預設顯示 input 資料夾的照片
+                const slider = document.getElementById('slider-compare-' + (i + 1));
                 let inputIdx = inputFiles.indexOf('output_' + files[i].replace('res_', ''));
                 if (inputIdx === -1) inputIdx = 0;
-                img.src = `static/images/flare_remove/input/${inputFiles[inputIdx]}`;
-                img.setAttribute('data-hover', `static/images/flare_remove/${method}/${files[i]}`);
-                img.setAttribute('data-method', method);
-                img.setAttribute('data-idx', i);
-                img.alt = `Comparison ${i + 1}`;
+                const beforeSrc = `static/images/flare_remove/input/${inputFiles[inputIdx]}`;
+                const afterSrc = `static/images/flare_remove/${method}/${files[i]}`;
+                createSliderCompare(slider, beforeSrc, afterSrc, i);
               }
             };
 
             document.addEventListener('DOMContentLoaded', function () {
               selectComparisonMethod(document.querySelector('.method-pill.active'));
-              document.querySelectorAll('.hover-swap-image').forEach(img => {
-                img.addEventListener('mouseenter', function () {
-                  if (img.getAttribute('data-hover')) img.src = img.getAttribute('data-hover');
-                });
-                img.addEventListener('mouseleave', function () {
-                  // 回到 input 資料夾的照片
-                  const method = document.querySelector('.method-pill.active').getAttribute('data-value');
-                  const files = methodFiles[method];
-                  const idx = parseInt(img.id.split('-')[2], 10) - 1;
-                  let inputIdx = inputFiles.indexOf('output_' + files[idx].replace('res_', ''));
-                  if (inputIdx === -1) inputIdx = 0;
-                  img.src = `static/images/flare_remove/input/${inputFiles[inputIdx]}`;
-                  img.setAttribute('data-method', method);
-                  img.setAttribute('data-idx', idx);
-                });
-              });
             });
           </script>
 
-          <p class="hover-instruction">Hover over any image to see the comparison results</p>
+          <!-- <p class="hover-instruction">Hover over any image to see the comparison results</p> -->
         </div>
       </div>
       <!--/ Animation. -->
 
-      <div class="columns is-centered">
-        <div class="column is-full-width">
-          <p class="text-justify" style="text-align: center;">
-            Compare our LightsOut method with different baseline approaches. Select a method above and hover over the
-            image to see the before/after comparison.
-          </p>
-        </div>
-      </div>
+      <!-- <div class="columns is-centered"> -->
+      <!-- <div class="column is-full-width"> -->
+      <!-- <p class="text-justify" style="text-align: center;"> -->
+      <!-- Compare our LightsOut method with different baseline approaches. Select a method above and hover over the -->
+      <!-- image to see the before/after comparison. -->
+      <!-- </p> -->
+      <!-- </div> -->
+      <!-- </div> -->
 
       <!-- Quantitative Results. -->
       <!-- <div class="columns is-centered has-text-centered"> -->
@@ -585,7 +638,7 @@
         <div class="column is-8">
           <div class="content">
             <p>
-              Website template borrowed from<a href="https://kkennethwu.github.io/aurafusion360/">AuraFusion360</a>, <a
+              Website template borrowed from <a href="https://kkennethwu.github.io/aurafusion360/">AuraFusion360</a>, <a
                 href="https://nerfies.github.io/">NeRFies</a>, <a
                 href="https://dorverbin.github.io/refnerf">Ref-NeRF</a>, <a
                 href="https://reconfusion.github.io/">ReconFusion</a> and <a href="https://nesf3d.github.io/">NeSF</a>.
