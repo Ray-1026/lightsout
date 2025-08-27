@@ -126,7 +126,7 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: 1;
+      z-index: 0;
       mix-blend-mode: screen;
       background:
         conic-gradient(from 0deg at var(--x, 50%) var(--y, 40%), rgba(255, 255, 255, .0), rgba(255, 255, 255, .25) 2deg, rgba(255, 255, 255, 0) 14deg) 0 0/100% 100% no-repeat;
@@ -552,35 +552,31 @@
       <!-- 為 Outpainting Result 區域添加 hover 事件處理 -->
       <script>
         document.addEventListener('DOMContentLoaded', function () {
-          // 只為 Outpainting Result 區域的圖片添加 hover 事件
           const outpaintingImages = document.querySelectorAll('.outpainting-section .hover-swap-image');
+
+          // 存好原始和 hover 圖
           outpaintingImages.forEach(img => {
-            // 存儲原始圖片路徑
             if (!img.dataset.originalSrc) {
               img.dataset.originalSrc = img.src;
             }
+          });
 
-            const originalSrc = img.dataset.originalSrc;
-            const hoverSrc = img.getAttribute('data-hover');
+          // 綁定 hover 事件給整個區域
+          const section = document.querySelector('.outpainting-section');
 
-            if (hoverSrc) {
-              // 移除現有的事件監聽器
-              img.onmouseenter = null;
-              img.onmouseleave = null;
+          section.addEventListener('mouseenter', function () {
+            outpaintingImages.forEach(img => {
+              const hoverSrc = img.getAttribute('data-hover');
+              if (hoverSrc) {
+                img.src = hoverSrc;
+              }
+            });
+          });
 
-              // 預載入 hover 圖片
-              const hoverImage = new Image();
-              hoverImage.src = hoverSrc;
-
-              // 添加新的事件監聽器
-              img.onmouseenter = function () {
-                this.src = hoverSrc;
-              };
-
-              img.onmouseleave = function () {
-                this.src = originalSrc;
-              };
-            }
+          section.addEventListener('mouseleave', function () {
+            outpaintingImages.forEach(img => {
+              img.src = img.dataset.originalSrc;
+            });
           });
         });
       </script>
