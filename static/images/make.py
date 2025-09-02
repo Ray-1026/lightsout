@@ -1,4 +1,4 @@
-
+svg_content = '''
 <svg width="768" height="512" viewBox="0 40 256 180" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <!-- Gradients -->
@@ -113,3 +113,8 @@
           stroke="url(#arrowGrad)" stroke-width="2" fill="none"/>
   </g>
 </svg>
+'''
+
+path = './favicon_new.svg'
+with open(path, 'w', encoding='utf-8') as f:
+    f.write(svg_content)
