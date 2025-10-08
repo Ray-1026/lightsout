@@ -419,78 +419,84 @@
                 'output_000018.png', 'output_000034.png', 'output_000050.png', 'output_000052.png', 'output_000074.png', 'output_000095.png'
               ];
 
+              // --- (Optimized) Slider ---
               function createSliderCompare(container, beforeSrc, afterSrc, idx) {
                 container.innerHTML = '';
-                // Before image
+
+                const sliderContainer = document.createElement('div');
+                sliderContainer.className = 'slider-container';
+
+                // 
                 const beforeImg = document.createElement('img');
                 beforeImg.src = beforeSrc;
-                beforeImg.loading = 'lazy';
                 beforeImg.alt = 'Before';
+                beforeImg.loading = 'lazy';
                 beforeImg.draggable = false;
-                container.appendChild(beforeImg);
-                // After image
+                sliderContainer.appendChild(beforeImg);
+
+                // 
                 const afterImg = document.createElement('img');
                 afterImg.src = afterSrc;
                 afterImg.alt = 'After';
                 afterImg.loading = 'lazy';
                 afterImg.style.clipPath = 'inset(0 0 0 50%)';
                 afterImg.draggable = false;
-                afterImg.className = 'after-img';
-                container.appendChild(afterImg);
+                sliderContainer.appendChild(afterImg);
+
                 // Slider bar
                 const bar = document.createElement('div');
                 bar.className = 'slider-bar';
-                container.appendChild(bar);
+                sliderContainer.appendChild(bar);
+
                 // Slider handle
                 const handle = document.createElement('div');
                 handle.className = 'slider-handle';
-                container.appendChild(handle);
-                // Labels
-                // const labelLeft = document.createElement('div');
-                // labelLeft.className = 'slider-label left';
-                // labelLeft.textContent = 'Baseline';
-                // container.appendChild(labelLeft);
-                // const labelRight = document.createElement('div');
-                // labelRight.className = 'slider-label right';
-                // labelRight.textContent = '+Ours';
-                // container.appendChild(labelRight);
+                sliderContainer.appendChild(handle);
 
-                // Drag logic
-                let dragging = false;
-                let sliderPos = 0.5;
-                function setSlider(pos) {
-                  sliderPos = Math.max(0.02, Math.min(0.98, pos));
-                  const percent = sliderPos * 100;
-                  afterImg.style.clipPath = `inset(0 0 0 ${percent}%)`;
-                  bar.style.left = `${percent}%`;
-                  handle.style.left = `${percent}%`;
+                container.appendChild(sliderContainer);
+
+                let isDragging = false;
+
+                function updateSlider(position) {
+                  const pct = Math.max(0, Math.min(1, position)) * 100 + '%';
+                  afterImg.style.clipPath = `inset(0 0 0 ${pct})`;
+                  bar.style.left = pct;
+                  handle.style.left = pct;
                 }
-                setSlider(0.5);
+
+                function startDrag(e) {
+                  e.preventDefault();
+                  isDragging = true;
+                  sliderContainer.style.cursor = 'grabbing';
+                  document.addEventListener('mousemove', onDrag);
+                  document.addEventListener('mouseup', stopDrag);
+                  document.addEventListener('touchmove', onDrag);
+                  document.addEventListener('touchend', stopDrag);
+                }
+
                 function onDrag(e) {
-                  if (!dragging) return;
-                  let x;
-                  if (e.touches && e.touches[0]) {
-                    x = e.touches[0].clientX;
-                  } else {
-                    x = e.clientX;
-                  }
-                  const rect = container.getBoundingClientRect();
-                  const pos = (x - rect.left) / rect.width;
-                  setSlider(pos);
+                  if (!isDragging) return;
+                  const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                  const rect = sliderContainer.getBoundingClientRect();
+                  updateSlider((clientX - rect.left) / rect.width);
                 }
-                handle.addEventListener('mousedown', function (e) { dragging = true; e.preventDefault(); });
-                bar.addEventListener('mousedown', function (e) { dragging = true; e.preventDefault(); });
-                window.addEventListener('mousemove', onDrag);
-                window.addEventListener('mouseup', function () { dragging = false; });
-                handle.addEventListener('touchstart', function (e) { dragging = true; });
-                bar.addEventListener('touchstart', function (e) { dragging = true; });
-                window.addEventListener('touchmove', onDrag);
-                window.addEventListener('touchend', function () { dragging = false; });
-                container.addEventListener('click', function (e) {
-                  const rect = container.getBoundingClientRect();
-                  const pos = (e.clientX - rect.left) / rect.width;
-                  setSlider(pos);
-                });
+
+                function stopDrag() {
+                  isDragging = false;
+                  sliderContainer.style.cursor = 'grab';
+                  document.removeEventListener('mousemove', onDrag);
+                  document.removeEventListener('mouseup', stopDrag);
+                  document.removeEventListener('touchmove', onDrag);
+                  document.removeEventListener('touchend', stopDrag);
+                }
+                bar.addEventListener('mousedown', startDrag);
+                bar.addEventListener('touchstart', startDrag);
+                handle.addEventListener('mousedown', startDrag);
+                handle.addEventListener('touchstart', startDrag);
+                sliderContainer.addEventListener('mousedown', startDrag);
+                sliderContainer.addEventListener('touchstart', startDrag);
+
+                window.addEventListener('load', () => updateSlider(0.5));
               }
 
               window.selectComparisonMethod = function (el) {
