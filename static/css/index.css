@@ -529,26 +529,25 @@ input:checked+.slider:after {
   background: #6ad1ff;
   border-radius: 1px;
 }
+.slider-compare .slider-label {
+  position: absolute;
+  top: 12px;
+  left: 18px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 1em;
+  z-index: 4;
+  pointer-events: none;
+  font-weight: 500;
+}
 
-/* .slider-compare .slider-label {
-              position: absolute;
-              top: 12px;
-              left: 18px;
-              background: rgba(0, 0, 0, 0.55);
-              color: #fff;
-              padding: 4px 12px;
-              border-radius: 12px;
-              font-size: 1em;
-              z-index: 4;
-              pointer-events: none;
-              font-weight: 500;
-            }
-
-            .slider-compare .slider-label.right {
-              left: auto;
-              right: 18px;
-              background: rgba(106, 209, 255, 0.55);
-            } */
+.slider-compare .slider-label.right {
+  left: auto;
+  right: 18px;
+  background: rgba(106, 209, 255, 0.55);
+}
 
 /* Navbar Styles */
 .navbar {

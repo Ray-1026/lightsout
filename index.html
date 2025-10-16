@@ -161,6 +161,9 @@
             More Research
           </a>
           <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://skyfall-gs.jayinnn.dev/">
+              Skyfall-GS
+            </a>
             <a class="navbar-item" href="https://spf-web.pages.dev/">
               See, Point, Fly
             </a>
@@ -194,9 +197,9 @@
               <h3 class="subtitle is-3 publication-subtitle highlight">ICCV 2025</h3>
               <div class="is-size-4 publication-authors">
                 <span class="author-block">
-                  <a href="https://ray-1026.github.io/">Shr-Ruei Tsai</a></span>
+                  <a href="https://www.linkedin.com/in/shr-ruei-tsai/">Shr-Ruei Tsai</a></span>
                 <span class="author-block">
-                  <a href="">Wei-Cheng Chang</a></span>
+                  <a href="https://openreview.net/profile?id=~Wei-Cheng_Chang3/">Wei-Cheng Chang</a></span>
                 <span class="author-block">
                   <a href="https://jayinnn.dev/">Jie-Ying Lee</a></span>
                 <span class="author-block">
@@ -225,7 +228,7 @@
                       <span class="icon">
                         <i class="fab fa-github"></i>
                       </span>
-                      <span>Code (coming soon)</span>
+                      <span>Code</span>
                     </a>
                   </span>
                   <span class="link-block">
@@ -235,6 +238,16 @@
                           height="20" alt="HF">
                       </span>
                       <span>Hugging Face demo (coming soon)</span>
+                    </a>
+                  </span>
+                  <span>
+                    <!-- evaluation results google drive link -->
+                     <a href="https://drive.google.com/file/d/1ugxY8eTag5y7zi4RbmOECE4tb6m_ZVUT/view?usp=sharing"
+                      class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fab fa-google-drive"></i>
+                      </span>
+                      <span>Evaluation Results</span>
                     </a>
                   </span>
                 </div>
@@ -402,22 +415,22 @@
 
             <script>
               // method: zhou, flare7k, mfdnet
-              const methodFiles = {
-                zhou: [
-                  'res_000000.png', 'res_000002.png', 'res_000004.png', 'res_000009.png', 'res_000037.png', 'res_000096.png'
-                ],
-                flare7k: [
-                  'res_000008.png', 'res_000010.png', 'res_000014.png', 'res_000032.png', 'res_000033.png', 'res_000036.png'
-                ],
-                mfdnet: [
-                  'res_000018.png', 'res_000034.png', 'res_000050.png', 'res_000052.png', 'res_000074.png', 'res_000095.png'
-                ]
-              };
-              const inputFiles = [
-                'output_000000.png', 'output_000002.png', 'output_000004.png', 'output_000009.png', 'output_000037.png', 'output_000096.png',
-                'output_000008.png', 'output_000010.png', 'output_000014.png', 'output_000032.png', 'output_000033.png', 'output_000036.png',
-                'output_000018.png', 'output_000034.png', 'output_000050.png', 'output_000052.png', 'output_000074.png', 'output_000095.png'
-              ];
+              // const methodFiles = {
+              //   zhou: [
+              //     'res_000000.png', 'res_000002.png', 'res_000004.png', 'res_000009.png', 'res_000037.png', 'res_000096.png'
+              //   ],
+              //   flare7k: [
+              //     'res_000008.png', 'res_000010.png', 'res_000014.png', 'res_000032.png', 'res_000033.png', 'res_000036.png'
+              //   ],
+              //   mfdnet: [
+              //     'res_000018.png', 'res_000034.png', 'res_000050.png', 'res_000052.png', 'res_000074.png', 'res_000095.png'
+              //   ]
+              // };
+              // const inputFiles = [
+              //   'output_000000.png', 'output_000002.png', 'output_000004.png', 'output_000009.png', 'output_000037.png', 'output_000096.png',
+              //   'output_000008.png', 'output_000010.png', 'output_000014.png', 'output_000032.png', 'output_000033.png', 'output_000036.png',
+              //   'output_000018.png', 'output_000034.png', 'output_000050.png', 'output_000052.png', 'output_000074.png', 'output_000095.png'
+              // ];
 
               // --- (Optimized) Slider ---
               function createSliderCompare(container, beforeSrc, afterSrc, idx) {
@@ -454,6 +467,16 @@
                 sliderContainer.appendChild(handle);
 
                 container.appendChild(sliderContainer);
+
+                // Labels
+                const labelLeft = document.createElement('div');
+                labelLeft.className = 'slider-label left';
+                labelLeft.textContent = 'Baseline';
+                container.appendChild(labelLeft);
+                const labelRight = document.createElement('div');
+                labelRight.className = 'slider-label right';
+                labelRight.textContent = '+Ours';
+                container.appendChild(labelRight);
 
                 let isDragging = false;
 
@@ -503,13 +526,15 @@
                 document.querySelectorAll('.method-pill').forEach(pill => pill.classList.remove('active'));
                 el.classList.add('active');
                 const method = el.getAttribute('data-value');
-                const files = methodFiles[method];
+                // const files = methodFiles[method];
                 for (let i = 0; i < 6; i++) {
                   const slider = document.getElementById('slider-compare-' + (i + 1));
-                  let inputIdx = inputFiles.indexOf('output_' + files[i].replace('res_', ''));
-                  if (inputIdx === -1) inputIdx = 0;
-                  const beforeSrc = `static/images/flare_remove/input/${inputFiles[inputIdx]}`;
-                  const afterSrc = `static/images/flare_remove/${method}/${files[i]}`;
+                  // let inputIdx = inputFiles.indexOf('output_' + files[i].replace('res_', ''));
+                  // if (inputIdx === -1) inputIdx = 0;
+                  // const beforeSrc = `static/images/flare_remove/input/${inputFiles[inputIdx]}`;
+                  // const afterSrc = `static/images/flare_remove/${method}/${files[i]}`;
+                  const beforeSrc = `static/images/SIFRresult/${method}/${i}_1.png`;
+                  const afterSrc = `static/images/SIFRresult/${method}/${i}_2.png`;
                   createSliderCompare(slider, beforeSrc, afterSrc, i);
                 }
               };
@@ -672,10 +697,12 @@
         line-height: 1.5; 
         overflow-x: auto;
       "><code>@InProceedings{tsai2025lightsout,
-  title     = {LightsOut: Diffusion-based Outpainting for Enhanced Lens Flare Removal},
   author    = {Tsai, Shr-Ruei and Chang, Wei-Cheng and Lee, Jie-Ying and Su, Chih-Hai and Liu, Yu-Lun},
-  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision},
-  year      = {2025}
+  title     = {LightsOut: Diffusion-based Outpainting for Enhanced Lens Flare Removal},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  month     = {October},
+  year      = {2025},
+  pages     = {6353-6363}
 }</code></pre>
             </div>
           </div>
