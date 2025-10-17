@@ -468,6 +468,8 @@
                   afterImg.style.clipPath = `inset(0 0 0 ${pct})`;
                   bar.style.left = pct;
                   handle.style.left = pct;
+                  labelRight.style.opacity = 1 - (position);
+                  labelLeft.style.opacity = position;
                 }
 
                 function startDrag(e) {
