@@ -232,7 +232,8 @@
                     </a>
                   </span>
                   <span class="link-block">
-                    <a href="https://huggingface.co/spaces/RayTsai-030/LightsOut-demo" class="external-link button is-normal is-rounded is-dark">
+                    <a href="https://huggingface.co/spaces/RayTsai-030/LightsOut-demo"
+                      class="external-link button is-normal is-rounded is-dark">
                       <span class="icon">
                         <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" width="20"
                           height="20" alt="HF">
@@ -242,7 +243,7 @@
                   </span>
                   <span>
                     <!-- evaluation results google drive link -->
-                     <a href="https://drive.google.com/file/d/1ugxY8eTag5y7zi4RbmOECE4tb6m_ZVUT/view?usp=sharing"
+                    <a href="https://drive.google.com/file/d/1ugxY8eTag5y7zi4RbmOECE4tb6m_ZVUT/view?usp=sharing"
                       class="external-link button is-normal is-rounded is-dark">
                       <span class="icon">
                         <i class="fab fa-google-drive"></i>
@@ -287,23 +288,23 @@
   </section> -->
 
     <!-- Video. -->
-    <!-- <section class="section"> -->
-    <!-- <div class="container is-max-desktop"> -->
-    <!-- Video. -->
-    <!-- <div class="columns is-centered has-text-centered"> -->
-    <!-- <div class="column is-full-width"> -->
-    <!-- <h2 class="title is-2">Video</h2> -->
-    <!-- <div class="video-container" -->
-    <!-- style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px;"> -->
-    <!-- <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px;" src="" -->
-    <!-- frameborder="0" -->
-    <!-- allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" -->
-    <!-- allowfullscreen></iframe> -->
-    <!-- </div> -->
-    <!-- </div> -->
-    <!-- </div> -->
-    <!-- </div> -->
-    <!-- </section> -->
+    <section class="section">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-2">Video</h2>
+            <div class="video-container"
+              style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 12px;">
+              <iframe width="935" height="526" src="https://www.youtube.com/embed/VNzJ9Z_dJNI"
+                title="[ICCV 2025] LightsOut: Diffusion-based Outpainting for Enhanced Lens Flare Removal"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Abstract. -->
     <section class="section">
@@ -414,24 +415,6 @@
             </div>
 
             <script>
-              // method: zhou, flare7k, mfdnet
-              // const methodFiles = {
-              //   zhou: [
-              //     'res_000000.png', 'res_000002.png', 'res_000004.png', 'res_000009.png', 'res_000037.png', 'res_000096.png'
-              //   ],
-              //   flare7k: [
-              //     'res_000008.png', 'res_000010.png', 'res_000014.png', 'res_000032.png', 'res_000033.png', 'res_000036.png'
-              //   ],
-              //   mfdnet: [
-              //     'res_000018.png', 'res_000034.png', 'res_000050.png', 'res_000052.png', 'res_000074.png', 'res_000095.png'
-              //   ]
-              // };
-              // const inputFiles = [
-              //   'output_000000.png', 'output_000002.png', 'output_000004.png', 'output_000009.png', 'output_000037.png', 'output_000096.png',
-              //   'output_000008.png', 'output_000010.png', 'output_000014.png', 'output_000032.png', 'output_000033.png', 'output_000036.png',
-              //   'output_000018.png', 'output_000034.png', 'output_000050.png', 'output_000052.png', 'output_000074.png', 'output_000095.png'
-              // ];
-
               // --- (Optimized) Slider ---
               function createSliderCompare(container, beforeSrc, afterSrc, idx) {
                 container.innerHTML = '';
